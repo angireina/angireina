@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REINA · Angi Reina — Diseño gráfico y estrategia de marca</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- NAV -->
+    <header id="nav" data-testid="nav-root">
+        <nav class="container nav-inner">
+            <a href="#inicio" class="nav-logo" data-testid="nav-logo">
+                <img src="img/logo_reina.svg" alt="REINA" class="nav-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#servicios" class="nav-link" data-testid="nav-link-servicios">Servicios</a></li>
+                <li><a href="#caso" class="nav-link" data-testid="nav-link-caso">Caso</a></li>
+                <li><a href="#portfolio" class="nav-link" data-testid="nav-link-portfolio">Portfolio</a></li>
+                <li><a href="#sobre-mi" class="nav-link" data-testid="nav-link-sobre-mi">Sobre mí</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#contacto" class="btn-primary nav-cta" data-testid="nav-hablemos-button">Hablemos</a>
+                <button class="hamburger" id="menuToggle" data-testid="nav-menu-toggle" aria-label="Menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu" data-testid="nav-mobile-menu">
+            <ul>
+                <li><a href="#servicios" class="mobile-nav-link" data-testid="nav-mobile-link-servicios">Servicios</a></li>
+                <li><a href="#caso" class="mobile-nav-link" data-testid="nav-mobile-link-caso">Caso</a></li>
+                <li><a href="#portfolio" class="mobile-nav-link" data-testid="nav-mobile-link-portfolio">Portfolio</a></li>
+                <li><a href="#sobre-mi" class="mobile-nav-link" data-testid="nav-mobile-link-sobre-mi">Sobre mí</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section id="inicio" data-testid="hero-section" class="hero-section">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <p class="reveal section-marker hero-eyebrow" data-testid="hero-eyebrow">
+                            <span class="marker-line"></span>
+                            Rosario · Argentina
+                        </p>
+                        <h1 class="reveal font-display hero-headline" data-delay="1" data-testid="hero-headline">
+                            Tu negocio merece <em>verse</em> tan <span class="accent-underline">bien</span><br>
+                            como funciona.
+                        </h1>
+                        <p class="reveal hero-subhead" data-delay="2" data-testid="hero-subhead">
+                            Diseño gráfico y estrategia de marca para negocios que ya son buenos — y ahora quieren mostrarse como tal. Identidad, contenido y presencia digital con intención.
+                        </p>
+                        <div class="reveal hero-ctas" data-delay="3">
+                            <a href="#" class="btn-primary wa-link" data-testid="hero-primary-cta" data-wa-msg="Hola Angi, vi tu trabajo y me encantó. Me gustaría que trabajemos juntas en mi marca.">
+                                Quiero que trabajemos juntos
+                            </a>
+                            <a href="#portfolio" class="hero-secondary-cta" data-testid="hero-secondary-cta">
+                                <span class="text-link">Ver mi trabajo</span>
+                                <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12l7 7 7-7"/></svg>
+                            </a>
+                        </div>
+                        <div class="reveal hero-stats" data-delay="4">
+                            <div class="stat">
+                                <span class="font-display stat-number">+6</span>
+                                <span class="stat-label">años</span>
+                            </div>
+                            <div class="stat">
+                                <span class="font-display stat-number">+40</span>
+                                <span class="stat-label">marcas</span>
+                            </div>
+                            <div class="stat">
+                                <span class="font-display stat-number">100%</span>
+                                <span class="stat-label">con intención</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <div class="reveal hero-image-container">
+                            <div class="hero-deco-circle"></div>
+                            <div class="hero-deco-line"></div>
+                            <div class="hero-portrait-frame arch-frame">
+                                <img src="https://images.unsplash.com/photo-1774016591221-d3e8e7ebdd16?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwcG9ydHJhaXQlMjBzaWxob3VldHRlJTIwYWVzdGhldGljfGVufDB8fHx8MTc3NjQxNTExNnww&ixlib=rb-4.1.0&q=85" alt="Retrato editorial minimalista" class="hero-portrait-img" data-testid="hero-portrait" loading="eager">
+                                <div class="hero-portrait-overlay"></div>
+                            </div>
+                            <div class="hero-name-card">
+                                <p class="name-card-label">Estudio</p>
+                                <p class="font-display name-card-name">Angi Reina</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll-hint">
+                <span class="scroll-line"></span>
+                Scroll
+            </div>
+        </section>
+
+        <!-- PROBLEM -->
+        <section data-testid="problem-section" class="problem-section">
+            <div class="container-narrow">
+                <p class="reveal section-marker problem-eyebrow" data-testid="problem-eyebrow">
+                    <span class="marker-line-light"></span>
+                    El problema real
+                </p>
+                <div class="problem-quotes">
+                    <blockquote class="reveal problem-quote" data-delay="1" data-testid="problem-quote-1">
+                        <p class="font-display">"Mi negocio funciona, pero en Instagram parece otra cosa."</p>
+                    </blockquote>
+                    <blockquote class="reveal problem-quote" data-delay="2" data-testid="problem-quote-2">
+                        <p class="font-display">"Invertí en productos hermosos, y las fotos no los hacen justicia."</p>
+                    </blockquote>
+                    <blockquote class="reveal problem-quote" data-delay="3" data-testid="problem-quote-3">
+                        <p class="font-display">"Me cuesta explicar en pocas palabras por qué deberían elegirme."</p>
+                    </blockquote>
+                </div>
+                <p class="reveal font-display problem-closing" data-testid="problem-closing">
+                    No es que tu negocio no sea bueno.<br>
+                    <span class="text-violet">Es que todavía no lo estás mostrando</span> como se merece.
+                </p>
+                <div class="reveal problem-footer">
+                    <span class="problem-line"></span>
+                    Y ahí entro yo
+                    <span class="problem-line"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="servicios" data-testid="services-section" class="services-section">
+            <div class="container">
+                <div class="services-header">
+                    <div class="services-header-left">
+                        <p class="reveal section-marker services-eyebrow">
+                            <span class="marker-line"></span>
+                            Servicios
+                        </p>
+                        <h2 class="reveal font-display services-heading" data-delay="1" data-testid="services-heading">
+                            ¿En qué puedo<br><em>ayudarte</em>?
+                        </h2>
+                    </div>
+                    <div class="reveal services-header-right" data-delay="2">
+                        <p class="services-subtext">Tres formas de trabajar juntas. Se pueden combinar o empezar por donde más te duele hoy.</p>
+                    </div>
+                </div>
+
+                <div class="services-grid">
+                    <article class="reveal service-card" data-delay="1" data-testid="service-card-01">
+                        <div class="service-card-top">
+                            <span class="font-display service-number">/ 01</span>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </div>
+                        <h3 class="font-display service-title">Identidad Visual</h3>
+                        <p class="service-desc">Logos, paletas, tipografías, manuales. Una identidad pensada para sostenerse en el tiempo, no sólo para el primer post.</p>
+                        <ul class="service-tags">
+                            <li>Logo</li>
+                            <li>Manual de marca</li>
+                            <li>Papelería</li>
+                        </ul>
+                    </article>
+                    <article class="reveal service-card" data-delay="2" data-testid="service-card-02">
+                        <div class="service-card-top">
+                            <span class="font-display service-number">/ 02</span>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </div>
+                        <h3 class="font-display service-title">Contenido para Redes</h3>
+                        <p class="service-desc">Diseño y dirección de contenido para Instagram y TikTok. Placas, reels, historias con criterio editorial y ritmo.</p>
+                        <ul class="service-tags">
+                            <li>Feed</li>
+                            <li>Reels</li>
+                            <li>Historias</li>
+                        </ul>
+                    </article>
+                    <article class="reveal service-card" data-delay="3" data-testid="service-card-03">
+                        <div class="service-card-top">
+                            <span class="font-display service-number">/ 03</span>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </div>
+                        <h3 class="font-display service-title">Estrategia de Marca</h3>
+                        <p class="service-desc">Posicionamiento, mensajes clave y plan de contenido. Claridad para saber qué decir, cuándo y a quién.</p>
+                        <ul class="service-tags">
+                            <li>Posicionamiento</li>
+                            <li>Copy</li>
+                            <li>Calendario</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="reveal services-cta-wrapper">
+                    <a href="#" class="btn-primary wa-link" data-testid="services-cta" data-wa-msg="Hola Angi, me interesa armar una propuesta para mi negocio. ¿Podemos conversar sobre qué servicio me conviene?">
+                        Armemos tu propuesta
+                    </a>
+                    <span class="services-disclaimer">Sin compromiso · Respondo en el día</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASE STUDY -->
+        <section id="caso" data-testid="casestudy-section" class="casestudy-section">
+            <div class="container">
+
+                <!-- Header row: title + stats -->
+                <div class="casestudy-header">
+                    <div class="casestudy-intro">
+                        <p class="reveal section-marker casestudy-eyebrow">
+                            <span class="marker-line"></span>
+                            Caso de estudio
+                        </p>
+                        <h2 class="reveal font-display casestudy-heading" data-delay="1" data-testid="casestudy-heading">
+                            Mueblería <em>Bravo</em>
+                        </h2>
+                        <p class="reveal casestudy-subtitle" data-delay="2">De catálogo olvidado a marca con<br>intención, en 4 meses.</p>
+                    </div>
+                    <div class="reveal casestudy-stats" data-delay="2">
+                        <div class="cs-stat">
+                            <span class="cs-stat-label">Seguidores</span>
+                            <span class="font-display cs-stat-value cs-stat-italic">+180%</span>
+                        </div>
+                        <div class="cs-stat">
+                            <span class="cs-stat-label">Consultas DM</span>
+                            <span class="font-display cs-stat-value cs-stat-italic">3×</span>
+                        </div>
+                        <div class="cs-stat">
+                            <span class="cs-stat-label">Tiempo</span>
+                            <span class="font-display cs-stat-value">4 meses</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Horizontal timeline -->
+                <div class="casestudy-timeline-h">
+                    <div class="h-step reveal" data-delay="1" data-testid="casestudy-step-01">
+                        <div class="h-step-track">
+                            <span class="h-dot"></span>
+                            <span class="h-line"></span>
+                        </div>
+                        <div class="h-step-content">
+                            <div class="step-meta">
+                                <span class="font-display step-number">/ 01</span>
+                                <span class="step-label">Contexto</span>
+                            </div>
+                            <h3 class="font-display step-title">Una mueblería con 22 años y cero identidad digital.</h3>
+                            <p class="step-body">Local hermoso, madera de primera, clientes fieles — pero en Instagram parecía un catálogo desordenado. La gente no entendía el valor.</p>
+                        </div>
+                    </div>
+                    <div class="h-step reveal" data-delay="2" data-testid="casestudy-step-02">
+                        <div class="h-step-track">
+                            <span class="h-dot"></span>
+                            <span class="h-line"></span>
+                        </div>
+                        <div class="h-step-content">
+                            <div class="step-meta">
+                                <span class="font-display step-number">/ 02</span>
+                                <span class="step-label">Lo que hicimos</span>
+                            </div>
+                            <h3 class="font-display step-title">Rediseño de identidad + sistema visual para redes.</h3>
+                            <p class="step-body">Nuevo logotipo, paleta neutra cálida, guía fotográfica propia y plantillas editoriales. Acompañé al equipo con un plan de contenido de 90 días.</p>
+                        </div>
+                    </div>
+                    <div class="h-step h-step--last reveal" data-delay="3" data-testid="casestudy-step-03">
+                        <div class="h-step-track">
+                            <span class="h-dot"></span>
+                        </div>
+                        <div class="h-step-content">
+                            <div class="step-meta">
+                                <span class="font-display step-number">/ 03</span>
+                                <span class="step-label">Resultados</span>
+                            </div>
+                            <h3 class="font-display step-title">El feed empezó a contar lo que el local ya era.</h3>
+                            <p class="step-body">En 4 meses duplicaron consultas orgánicas y firmaron su primer contrato con un estudio de arquitectura.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Images row -->
+                <div class="casestudy-images">
+                    <div class="reveal cs-img cs-img-before" data-delay="1" data-testid="casestudy-before">
+                        <div class="before-bg"></div>
+                        <div class="cs-img-badge">Antes</div>
+                    </div>
+                    <button class="reveal cs-video" data-delay="2" data-testid="casestudy-video">
+                        <div class="cs-video-label">Proceso · 0:45</div>
+                        <div class="cs-play-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
+                    </button>
+                    <div class="reveal cs-img cs-img-after" data-delay="3" data-testid="casestudy-after">
+                        <img src="https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png" alt="Mueblería Bravo - Después" loading="lazy">
+                        <div class="cs-img-badge">Después</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PORTFOLIO -->
+        <section id="portfolio" data-testid="portfolio-section" class="portfolio-section">
+            <div class="container">
+                <div class="portfolio-header">
+                    <div>
+                        <p class="reveal section-marker portfolio-eyebrow">
+                            <span class="marker-line-light"></span>
+                            Portfolio · selección
+                        </p>
+                        <h2 class="reveal font-display portfolio-heading" data-delay="1" data-testid="portfolio-heading">
+                            Trabajo <em class="text-violet">reciente</em>
+                        </h2>
+                    </div>
+                    <p class="reveal portfolio-subtext" data-delay="2">Algunas marcas que confiaron en mí para decirle al mundo lo que ya eran.</p>
+                </div>
+
+                <div class="portfolio-grid">
+                    <a href="#"
+                        class="portfolio-item reveal"
+                        data-delay="1"
+                        data-testid="portfolio-item-bravo-1"
+                        style="--col-span:8; aspect-ratio:5/4;"
+                        data-name="Mueblería Bravo"
+                        data-number="01"
+                        data-type="Identidad · Contenido"
+                        data-year="2024"
+                        data-desc="Rediseño completo de identidad para una mueblería con 22 años de historia. Nuevo logotipo, sistema de colores, guía fotográfica y plan de contenido para Instagram."
+                        data-tags="Identidad Visual,Redes Sociales,Estrategia de Marca"
+                        data-media='[{"type":"image","src":"https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png","alt":"Mueblería Bravo - Identidad"},{"type":"video","src":"URL_DEL_VIDEO_ACÁ","poster":"URL_THUMBNAIL_OPCIONAL"}]'>
+                        <img src="https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png" alt="Mueblería Bravo" class="media">
+                        <div class="overlay">
+                            <p class="overlay-type">Identidad · Contenido</p>
+                            <h3 class="font-display overlay-name">Mueblería Bravo</h3>
+                        </div>
+                        <span class="portfolio-number">01</span>
+                    </a>
+                    <a href="#"
+                        class="portfolio-item reveal"
+                        data-delay="2"
+                        data-testid="portfolio-item-silvestre"
+                        style="--col-span:4; aspect-ratio:4/5;"
+                        data-name="Silvestre"
+                        data-number="02"
+                        data-type="Marca · Floristería"
+                        data-year="2023"
+                        data-desc="Construcción de marca desde cero para una floristería boutique. Paleta botánica, tipografía artesanal y sistema de identidad aplicado a packaging y redes sociales."
+                        data-tags="Branding,Identidad Visual,Packaging"
+                        data-media='[{"type":"image","src":"https://images.unsplash.com/photo-1676050604071-2f741337923b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwZmxvd2VyJTIwc3RlbSUyMGFyY2hpdGVjdHVyYWx8ZW58MHx8fHwxNzc2NDE1MTE2fDA&ixlib=rb-4.1.0&q=85","alt":"Silvestre - Marca"}]'>
+                        <img src="https://images.unsplash.com/photo-1676050604071-2f741337923b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwZmxvd2VyJTIwc3RlbSUyMGFyY2hpdGVjdHVyYWx8ZW58MHx8fHwxNzc2NDE1MTE2fDA&ixlib=rb-4.1.0&q=85" alt="Silvestre" class="media">
+                        <div class="overlay">
+                            <p class="overlay-type">Marca · Floristería</p>
+                            <h3 class="font-display overlay-name">Silvestre</h3>
+                        </div>
+                        <span class="portfolio-number">02</span>
+                    </a>
+                    <a href="#"
+                        class="portfolio-item reveal"
+                        data-delay="3"
+                        data-testid="portfolio-item-pausa"
+                        style="--col-span:5; aspect-ratio:1/1;"
+                        data-name="Pausa"
+                        data-number="03"
+                        data-type="Marca · Café"
+                        data-year="2023"
+                        data-desc="Marca para un café de especialidad en Rosario. El nombre y la identidad visual transmiten esa pausa necesaria en el día. Aplicaciones en menú, packaging y señalética."
+                        data-tags="Branding,Naming,Señalética"
+                        data-media='[{"type":"image","src":"https://images.unsplash.com/photo-1676446547562-613597f00cf7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwY2VyYW1pYyUyMGNvZmZlZSUyMGN1cCUyMGVzcHJlc3NvfGVufDB8fHx8MTc3NjQxNTEyN3ww&ixlib=rb-4.1.0&q=85","alt":"Pausa - Café"}]'>
+                        <img src="https://images.unsplash.com/photo-1676446547562-613597f00cf7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwY2VyYW1pYyUyMGNvZmZlZSUyMGN1cCUyMGVzcHJlc3NvfGVufDB8fHx8MTc3NjQxNTEyN3ww&ixlib=rb-4.1.0&q=85" alt="Pausa" class="media">
+                        <div class="overlay">
+                            <p class="overlay-type">Marca · Café</p>
+                            <h3 class="font-display overlay-name">Pausa</h3>
+                        </div>
+                        <span class="portfolio-number">03</span>
+                    </a>
+                    <a href="#"
+                        class="portfolio-item reveal"
+                        data-delay="4"
+                        data-testid="portfolio-item-bravo-2"
+                        style="--col-span:7; aspect-ratio:16/10;"
+                        data-name="Mueblería Bravo"
+                        data-number="04"
+                        data-type="Editorial · Lookbook"
+                        data-year="2024"
+                        data-desc="Producción editorial y diseño de lookbook para la temporada 2024. Dirección de arte, selección de producto y diseño de pieza impresa y digital."
+                        data-tags="Editorial,Fotografía,Dirección de Arte"
+                        data-media='[{"type":"image","src":"https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png","alt":"Mueblería Bravo - Lookbook"}]'>
+                        <img src="https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png" alt="Mueblería Bravo Lookbook" class="media">
+                        <div class="overlay">
+                            <p class="overlay-type">Editorial · Lookbook</p>
+                            <h3 class="font-display overlay-name">Mueblería Bravo</h3>
+                        </div>
+                        <span class="portfolio-number">04</span>
+                    </a>
+                </div>
+
+                <p class="reveal portfolio-hint">Pasá el cursor para ver detalles</p>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="sobre-mi" data-testid="about-section" class="about-section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <p class="reveal section-marker about-eyebrow">
+                            <span class="marker-line"></span>
+                            Sobre mí
+                        </p>
+                        <h2 class="reveal font-display about-heading" data-delay="1" data-testid="about-heading">
+                            Hola, soy <em>Angi</em>.
+                        </h2>
+                        <div class="reveal about-bio" data-delay="2">
+                            <p>Diseñadora gráfica y community manager desde Rosario. Hace más de seis años que acompaño a negocios chicos y medianos a encontrar una forma propia de mostrarse — una que se parezca a lo que ya son, no a lo que creen que deberían ser.</p>
+                            <p>Trabajo desde la estrategia, pero con manos de diseñadora. Me obsesionan los detalles, los tipos de letra que respiran y las marcas que se atreven a tener un punto de vista.</p>
+                        </div>
+                        <p class="reveal font-display about-tagline" data-delay="3" data-testid="about-tagline">
+                            "Donde la estética se vuelve estrategia."
+                        </p>
+                        <div class="reveal about-meta" data-delay="4">
+                            <div class="about-meta-item">
+                                <span class="meta-line"></span>
+                                <span class="meta-text">Rosario · AR</span>
+                            </div>
+                            <div class="about-meta-item">
+                                <span class="meta-dot"></span>
+                                <span class="meta-text">Agenda abierta 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image-wrapper">
+                        <div class="reveal about-image-frame">
+                            <div class="about-deco-border"></div>
+                            <div class="about-portrait-container">
+                                <img src="https://images.unsplash.com/photo-1663177432042-3b56aff51d3c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwZWRpdG9yaWFsJTIwZW1wdHklMjBmcmFtZSUyMG9mZi13aGl0ZSUyMHRleHR1cmV8ZW58MHx8fHwxNzc2NDE1MTE2fDA&ixlib=rb-4.1.0&q=85" alt="Angi Reina - retrato casual" loading="lazy" data-testid="about-portrait">
+                            </div>
+                            <div class="about-year-card">
+                                <p class="year-card-label">Desde</p>
+                                <p class="font-display year-card-text">2018 · diseñando<br>marcas con alma</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section id="contacto" data-testid="finalcta-section" class="finalcta-section">
+            <div class="finalcta-deco-top"></div>
+            <div class="finalcta-deco-bottom"></div>
+            <div class="container-mid">
+                <p class="reveal section-marker finalcta-eyebrow" data-testid="finalcta-eyebrow">
+                    <span class="cta-line"></span>
+                    Último empujón
+                    <span class="cta-line"></span>
+                </p>
+                <h2 class="reveal font-display finalcta-heading" data-delay="1" data-testid="finalcta-heading">
+                    ¿Tu negocio está listo<br>
+                    para verse como <em>lo que es</em>?
+                </h2>
+                <p class="reveal finalcta-subtext" data-delay="2">
+                    Escribime y conversemos sin compromiso. Cuéntame qué hacés, qué querés mostrar, y vemos juntas por dónde empezar.
+                </p>
+                <div class="reveal finalcta-buttons" data-delay="3">
+                    <a href="#" class="finalcta-primary-btn wa-link" data-testid="finalcta-whatsapp" data-wa-msg="Hola Angi, creo que mi negocio está listo para verse como lo que es. ¿Empezamos?">
+                        Escribime por WhatsApp
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                    <a href="mailto:hola@angireina.com" class="text-link finalcta-email" data-testid="finalcta-email">
+                        hola@angireina.com
+                    </a>
+                </div>
+                <div class="reveal finalcta-resp">
+                    <span class="resp-line"></span>
+                    Respondo en el día
+                    <span class="resp-line"></span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer data-testid="footer-section" class="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="img/logo_reina.svg" alt="REINA" class="footer-logo-img">
+                    </div>
+                    <p class="font-display footer-tagline">
+                        Donde la estética<br>se vuelve <span class="text-violet">estrategia</span>.
+                    </p>
+                    <p class="footer-desc">Estudio independiente de diseño gráfico y estrategia de marca. Rosario, Argentina.</p>
+                </div>
+                <div class="footer-nav">
+                    <p class="section-marker footer-col-title">Navegación</p>
+                    <ul>
+                        <li><a href="#servicios" data-testid="footer-link-servicios">Servicios</a></li>
+                        <li><a href="#caso" data-testid="footer-link-caso">Caso de estudio</a></li>
+                        <li><a href="#portfolio" data-testid="footer-link-portfolio">Portfolio</a></li>
+                        <li><a href="#sobre-mi" data-testid="footer-link-sobre-mi">Sobre mí</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <p class="section-marker footer-col-title">Contacto</p>
+                    <ul>
+                        <li><a href="#" class="wa-link" data-testid="footer-whatsapp" data-wa-msg="Hola Angi, te escribo desde tu web. ¿Podrías contarme más sobre tus servicios?">WhatsApp · +54 9 341 783 6449</a></li>
+                        <li><a href="mailto:hola@angireina.com" data-testid="footer-email">hola@angireina.com</a></li>
+                        <li><a href="https://instagram.com/reinabyangi" target="_blank" rel="noopener noreferrer" data-testid="footer-instagram">Instagram · @reinabyangi</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© <span id="footerYear"></span> REINA · Angi Reina. Todos los derechos reservados.</p>
+                <p class="footer-made">
+                    <span class="pear-dot"></span>
+                    Hecho a mano en Rosario
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PORTFOLIO MODAL -->
+    <div id="portfolioModal" class="pmodal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="pmodal" id="pmodalPanel">
+            <button class="pmodal-close" id="pmodalClose" aria-label="Cerrar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+
+            <!-- Media: imágenes y videos se inyectan aquí -->
+            <div class="pmodal-media" id="pmodalMedia"></div>
+
+            <!-- Info del proyecto -->
+            <div class="pmodal-info">
+                <div class="pmodal-meta">
+                    <span class="pmodal-number" id="pmodalNumber"></span>
+                    <span class="pmodal-type" id="pmodalType"></span>
+                    <span class="pmodal-year" id="pmodalYear"></span>
+                </div>
+                <h2 class="font-display pmodal-name" id="pmodalName"></h2>
+                <p class="pmodal-desc" id="pmodalDesc"></p>
+                <ul class="pmodal-tags" id="pmodalTags"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
