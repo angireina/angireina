@@ -9,8 +9,7 @@
         (function() {
             try {
                 var storedTheme = localStorage.getItem('reina-theme');
-                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                var theme = storedTheme || (prefersDark ? 'dark' : 'light');
+                var theme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : 'light';
                 document.documentElement.setAttribute('data-theme', theme);
             } catch (error) {
                 document.documentElement.setAttribute('data-theme', 'light');
@@ -1060,6 +1059,14 @@
             </div>
         </div>
     </div>
+
+    <button class="mobile-scroll-top" id="mobileScrollTop" type="button" aria-label="Volver arriba" title="Volver arriba">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V5" />
+            <path d="M5 12l7-7 7 7" />
+        </svg>
+        <span class="sr-only">Volver arriba</span>
+    </button>
 
     <script src="main.js"></script>
 </body>
