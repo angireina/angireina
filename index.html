@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <script>
+        (function() {
+            try {
+                var storedTheme = localStorage.getItem('reina-theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = storedTheme || (prefersDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <title>REINA · Angi Reina — Diseño gráfico y estrategia de marca</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg" sizes="32x32">
+    <!-- Fallback PNG para navegadores viejos -->
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
     <link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
 
     <!-- NAV -->
@@ -26,7 +41,24 @@
             </ul>
             <div class="nav-actions">
                 <a href="#contacto" class="btn-primary nav-cta" data-testid="nav-hablemos-button">Hablemos</a>
-                <button class="hamburger" id="menuToggle" data-testid="nav-menu-toggle" aria-label="Menu">
+                <button class="theme-toggle" id="themeToggle" type="button" data-testid="theme-toggle" aria-label="Activar modo oscuro" aria-pressed="false" title="Activar modo oscuro">
+                    <svg class="theme-toggle-icon theme-toggle-icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                    <svg class="theme-toggle-icon theme-toggle-icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2.5" />
+                        <path d="M12 19.5V22" />
+                        <path d="M4.93 4.93l1.77 1.77" />
+                        <path d="M17.3 17.3l1.77 1.77" />
+                        <path d="M2 12h2.5" />
+                        <path d="M19.5 12H22" />
+                        <path d="M4.93 19.07l1.77-1.77" />
+                        <path d="M17.3 6.7l1.77-1.77" />
+                    </svg>
+                    <span class="sr-only">Cambiar tema</span>
+                </button>
+                <button class="hamburger" id="menuToggle" data-testid="nav-menu-toggle" aria-label="Menu" aria-expanded="false">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                 </button>
@@ -66,7 +98,10 @@
                             </a>
                             <a href="#portfolio" class="hero-secondary-cta" data-testid="hero-secondary-cta">
                                 <span class="text-link">Ver mi trabajo</span>
-                                <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12l7 7 7-7"/></svg>
+                                <svg class="arrow-down" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14" />
+                                    <path d="M5 12l7 7 7-7" />
+                                </svg>
                             </a>
                         </div>
                         <div class="reveal hero-stats" data-delay="4">
@@ -150,15 +185,18 @@
                         </h2>
                     </div>
                     <div class="reveal services-header-right" data-delay="2">
-                        <p class="services-subtext">Tres formas de trabajar juntas. Se pueden combinar o empezar por donde más te duele hoy.</p>
+                        <p class="services-subtext">Seis formas de trabajar juntas. Se pueden combinar o empezar por donde más te duele hoy.</p>
                     </div>
                 </div>
 
                 <div class="services-grid">
-                    <article class="reveal service-card" data-delay="1" data-testid="service-card-01">
+                    <article class="reveal service-card" data-delay="1" data-testid="service-card-01" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="serviceModal" aria-label="Abrir detalle de Identidad Visual" data-service-visual="branding" data-service-type="Branding" data-service-hook="Una marca que se reconoce antes de leerse." data-service-ideal="Ideal si tu negocio creci&oacute; a fuerza de recomendaci&oacute;n, pero todav&iacute;a no tiene una identidad clara, consistente y f&aacute;cil de aplicar en cada punto de contacto." data-service-includes="Logo principal y versiones,Paleta y sistema tipografico,Manual base para aplicar la marca" data-service-approach="Ordenamos la esencia de tu negocio, definimos una direcci&oacute;n visual y armamos un sistema que puedas sostener en redes, piezas impresas, packaging o web sin improvisar." data-service-wa-msg="Hola Angi, quiero consultar por Identidad Visual para mi marca.">
                         <div class="service-card-top">
                             <span class="font-display service-number">/ 01</span>
-                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7" />
+                                <path d="M7 7h10v10" />
+                            </svg>
                         </div>
                         <h3 class="font-display service-title">Identidad Visual</h3>
                         <p class="service-desc">Logos, paletas, tipografías, manuales. Una identidad pensada para sostenerse en el tiempo, no sólo para el primer post.</p>
@@ -168,23 +206,29 @@
                             <li>Papelería</li>
                         </ul>
                     </article>
-                    <article class="reveal service-card" data-delay="2" data-testid="service-card-02">
+                    <article class="reveal service-card" data-delay="2" data-testid="service-card-02" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="serviceModal" aria-label="Abrir detalle de Gestion de Redes" data-service-visual="content" data-service-type="Contenido" data-service-hook="Presencia digital con criterio, ritmo y una voz coherente." data-service-ideal="Ideal si quer&eacute;s dejar de publicar por impulso y empezar a mostrar tu negocio con constancia, orden y una narrativa que conecte con la gente correcta." data-service-includes="Calendario de contenidos,Copys y bajadas visuales,Moderacion y seguimiento diario" data-service-approach="Definimos pilares, tono y prioridades. Despu&eacute;s bajamos eso a una rutina sostenible: qu&eacute; publicar, cu&aacute;ndo hacerlo y c&oacute;mo sostener la conversaci&oacute;n con tu comunidad." data-service-wa-msg="Hola Angi, quiero consultar por Gestion de Redes para mi marca.">
                         <div class="service-card-top">
                             <span class="font-display service-number">/ 02</span>
-                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7" />
+                                <path d="M7 7h10v10" />
+                            </svg>
                         </div>
-                        <h3 class="font-display service-title">Contenido para Redes</h3>
-                        <p class="service-desc">Diseño y dirección de contenido para Instagram y TikTok. Placas, reels, historias con criterio editorial y ritmo.</p>
+                        <h3 class="font-display service-title">Gestión de Redes</h3>
+                        <p class="service-desc">Community management con criterio: respondemos DMs, moderamos, subimos con intención y mantenemos el tono de tu marca.</p>
                         <ul class="service-tags">
-                            <li>Feed</li>
-                            <li>Reels</li>
-                            <li>Historias</li>
+                            <li>Instagram</li>
+                            <li>TikTok</li>
+                            <li>Community</li>
                         </ul>
                     </article>
-                    <article class="reveal service-card" data-delay="3" data-testid="service-card-03">
+                    <article class="reveal service-card" data-delay="3" data-testid="service-card-03" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="serviceModal" aria-label="Abrir detalle de Estrategia de Marca" data-service-visual="strategy" data-service-type="Posicionamiento" data-service-hook="Decir mejor lo que ya hac&eacute;s bien." data-service-ideal="Ideal si sent&iacute;s que tu negocio hace mucho, pero le cuesta explicarlo con claridad o diferenciarse de otras marcas que parecen decir lo mismo." data-service-includes="Posicionamiento y propuesta de valor,Mensajes clave para vender mejor,Linea editorial y enfoque de contenido" data-service-approach="Trabajamos desde el coraz&oacute;n de tu marca: a qui&eacute;n le habl&aacute;s, qu&eacute; necesit&aacute;s que entienda y qu&eacute; tono te conviene usar para sonar clara, memorable y propia." data-service-wa-msg="Hola Angi, quiero consultar por Estrategia de Marca para mi negocio.">
                         <div class="service-card-top">
                             <span class="font-display service-number">/ 03</span>
-                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7" />
+                                <path d="M7 7h10v10" />
+                            </svg>
                         </div>
                         <h3 class="font-display service-title">Estrategia de Marca</h3>
                         <p class="service-desc">Posicionamiento, mensajes clave y plan de contenido. Claridad para saber qué decir, cuándo y a quién.</p>
@@ -192,6 +236,54 @@
                             <li>Posicionamiento</li>
                             <li>Copy</li>
                             <li>Calendario</li>
+                        </ul>
+                    </article>
+                    <article class="reveal service-card" data-delay="4" data-testid="service-card-04" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="serviceModal" aria-label="Abrir detalle de Produccion Audiovisual" data-service-visual="video" data-service-type="Video" data-service-hook="Contenido que se ve prolijo, humano y con intenci&oacute;n." data-service-ideal="Ideal si necesit&aacute;s reels o piezas audiovisuales que muestren bien tu producto, tu servicio o tu proceso sin depender de tendencias vac&iacute;as." data-service-includes="Guion y estructura de cada pieza,Direccion de escena y encuadre,Edicion final lista para publicar" data-service-approach="Pensamos cada video como parte de una estrategia mayor: idea, ritmo, planos, luz, edici&oacute;n y entrega alineados con la identidad visual de tu marca." data-service-wa-msg="Hola Angi, quiero consultar por Produccion Audiovisual para mi marca.">
+                        <div class="service-card-top">
+                            <span class="font-display service-number">/ 04</span>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7" />
+                                <path d="M7 7h10v10" />
+                            </svg>
+                        </div>
+                        <h3 class="font-display service-title">Producción Audiovisual</h3>
+                        <p class="service-desc">Dirección de reels y contenido en video. Guion, encuadre, luz y edición con la voz visual de tu marca.</p>
+                        <ul class="service-tags">
+                            <li>Reels</li>
+                            <li>Edición</li>
+                            <li>Dirección</li>
+                        </ul>
+                    </article>
+                    <article class="reveal service-card" data-delay="5" data-testid="service-card-05" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="serviceModal" aria-label="Abrir detalle de Tienda Online" data-service-visual="shop" data-service-type="E-commerce" data-service-hook="Una tienda clara para vender sin fricci&oacute;n." data-service-ideal="Ideal si ya vend&eacute;s por Instagram o WhatsApp y necesit&aacute;s una tienda ordenada, simple de recorrer y preparada para convertir mejor." data-service-includes="Arquitectura y experiencia de compra,Carga visual y orden de productos,Configuracion base en Tiendanube o Shopify" data-service-approach="Armamos el recorrido completo: c&oacute;mo se ve la marca, c&oacute;mo se entienden las categor&iacute;as, c&oacute;mo se presentan los productos y d&oacute;nde conviene simplificar para vender m&aacute;s." data-service-wa-msg="Hola Angi, quiero consultar por una Tienda Online para mi negocio.">
+                        <div class="service-card-top">
+                            <span class="font-display service-number">/ 05</span>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7" />
+                                <path d="M7 7h10v10" />
+                            </svg>
+                        </div>
+                        <h3 class="font-display service-title">Tienda Online</h3>
+                        <p class="service-desc">Tiendas en Tiendanube o Shopify con tu identidad aplicada. Fichas claras, fotos ordenadas y un flujo de compra que vende.</p>
+                        <ul class="service-tags">
+                            <li>Tiendanube</li>
+                            <li>Shopify</li>
+                            <li>UX</li>
+                        </ul>
+                    </article>
+                    <article class="reveal service-card" data-delay="6" data-testid="service-card-06" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="serviceModal" aria-label="Abrir detalle de Diseno Grafico" data-service-visual="design" data-service-type="Piezas clave" data-service-hook="Cuando una pieza puntual tambi&eacute;n tiene que hablar bien de tu marca." data-service-ideal="Ideal si necesit&aacute;s resolver materiales espec&iacute;ficos sin perder coherencia visual: men&uacute;s, flyers, cat&aacute;logos, presentaciones o piezas para lanzamientos." data-service-includes="Piezas impresas o digitales,Adaptaciones a distintos formatos,Detalle visual listo para entregar" data-service-approach="Dise&ntilde;amos con criterio de marca, no como una pieza aislada. La idea es que cada material se sienta parte de un mismo universo y no un parche de &uacute;ltimo momento." data-service-wa-msg="Hola Angi, quiero consultar por Diseno Grafico para mi marca.">
+                        <div class="service-card-top">
+                            <span class="font-display service-number">/ 06</span>
+                            <svg class="service-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7" />
+                                <path d="M7 7h10v10" />
+                            </svg>
+                        </div>
+                        <h3 class="font-display service-title">Diseño Gráfico</h3>
+                        <p class="service-desc">Piezas puntuales, flyers, menús, catálogos, invitaciones. El detalle que a veces marca toda la diferencia.</p>
+                        <ul class="service-tags">
+                            <li>Print</li>
+                            <li>Digital</li>
+                            <li>Editorial</li>
                         </ul>
                     </article>
                 </div>
@@ -205,99 +297,389 @@
             </div>
         </section>
 
+        <!-- PRICING - CONTENIDO -->
+        <section id="planes-contenido" data-testid="pricing-contenido-section" class="pricing-section">
+            <div class="container">
+                <div class="pricing-header">
+                    <div class="pricing-header-left">
+                        <p class="reveal section-marker pricing-eyebrow">
+                            <span class="marker-line"></span>
+                            Planes · Contenido
+                        </p>
+                        <h2 class="reveal font-display pricing-heading" data-delay="1">
+                            Planes de <em>contenido</em>
+                        </h2>
+                    </div>
+                    <p class="reveal pricing-subtext" data-delay="2">
+                        Elegí la opción ideal para organizar, mejorar y potenciar la presencia de tu marca en redes.
+                    </p>
+                </div>
+
+                <div class="pricing-grid">
+                    <article class="reveal pricing-card" data-delay="1">
+                        <div class="pricing-card-top">
+                            <h3 class="font-display pricing-plan-name">Presencia</h3>
+                            <span class="pricing-plan-num">/01</span>
+                        </div>
+                        <p class="pricing-plan-desc">Ideal para empezar con una presencia más ordenada.</p>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-price-block">
+                            <span class="font-display pricing-price">$220.000</span>
+                            <span class="pricing-period">Mensual</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>6 piezas mensuales</li>
+                            <li>Historias 2 veces por semana</li>
+                            <li>Diseño claro y coherente con tu marca</li>
+                            <li>Organización básica del contenido</li>
+                            <li>Informe mensual simple</li>
+                        </ul>
+                    </article>
+
+                    <article class="reveal pricing-card pricing-card--featured" data-delay="2">
+                        <div class="pricing-badge">Más elegido</div>
+                        <div class="pricing-card-top">
+                            <h3 class="font-display pricing-plan-name">Crecimiento</h3>
+                            <span class="pricing-plan-num">/02</span>
+                        </div>
+                        <p class="pricing-plan-desc">Ideal para marcas que quieren crecer con una estrategia clara.</p>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-price-block">
+                            <span class="font-display pricing-price">$300.000</span>
+                            <span class="pricing-period">Mensual</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>10 piezas mensuales</li>
+                            <li>Historias 4 veces por semana</li>
+                            <li>Diseño trabajado y estratégico</li>
+                            <li>Optimización del perfil</li>
+                            <li>Estrategia de contenido</li>
+                            <li>Grabación de contenido en el local *</li>
+                        </ul>
+                    </article>
+
+                    <article class="reveal pricing-card" data-delay="3">
+                        <div class="pricing-card-top">
+                            <h3 class="font-display pricing-plan-name">Expansión</h3>
+                            <span class="pricing-plan-num">/03</span>
+                        </div>
+                        <p class="pricing-plan-desc">Ideal para marcas que buscan más constancia y resultados.</p>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-price-block">
+                            <span class="font-display pricing-price">$420.000</span>
+                            <span class="pricing-period">Mensual</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>14 piezas mensuales</li>
+                            <li>Historias 5 veces por semana</li>
+                            <li>Diseño más dinámico y trabajado</li>
+                            <li>2 piezas extras por mes</li>
+                            <li>Estrategia profunda con objetivos claros</li>
+                            <li>Grabación de contenido en local *</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <p class="pricing-footnote">* La grabación de contenido no incluye viáticos.</p>
+
+                <div class="reveal pricing-cta-row">
+                    <p class="font-display pricing-cta-text">
+                        <em>¿No sabés cuál es el ideal para tu negocio? Escribime y te ayudo a elegir sin compromiso.</em>
+                    </p>
+                    <a href="#" class="btn-primary wa-link pricing-wa-btn" data-wa-msg="Hola Angi, me gustaría saber cuál plan de contenido es el ideal para mi negocio. ¿Podemos conversar?">
+                        Escribime por WhatsApp
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 17L17 7" />
+                            <path d="M7 7h10v10" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING - TIENDA ONLINE -->
+        <section id="tienda-online" data-testid="pricing-tienda-section" class="pricing-section">
+            <div class="container">
+                <div class="pricing-header">
+                    <div class="pricing-header-left">
+                        <p class="reveal section-marker pricing-eyebrow">
+                            <span class="marker-line"></span>
+                            Tienda Online · Planes
+                        </p>
+                        <h2 class="reveal font-display pricing-heading" data-delay="1">
+                            Tienda <em>online</em>
+                        </h2>
+                    </div>
+                    <p class="reveal pricing-subtext" data-delay="2">
+                        Tu negocio, listo para vender en internet desde el primer día.
+                    </p>
+                </div>
+
+                <div class="pricing-grid">
+                    <article class="reveal pricing-card" data-delay="1">
+                        <div class="pricing-card-top">
+                            <h3 class="font-display pricing-plan-name">Básica</h3>
+                            <span class="pricing-plan-num">/01</span>
+                        </div>
+                        <p class="pricing-plan-desc">Para arrancar con presencia online rápido y sin complicaciones.</p>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-price-block">
+                            <span class="font-display pricing-price">$180.000</span>
+                            <span class="pricing-period">Pago único</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Hasta 20 productos</li>
+                            <li>Diseño con tu identidad visual</li>
+                            <li>Pagos y envíos configurados</li>
+                            <li>Integración con Instagram</li>
+                            <li>Entrega lista para usar</li>
+                        </ul>
+                    </article>
+
+                    <article class="reveal pricing-card pricing-card--featured" data-delay="2">
+                        <div class="pricing-badge">Más elegido</div>
+                        <div class="pricing-card-top">
+                            <h3 class="font-display pricing-plan-name">Pro</h3>
+                            <span class="pricing-plan-num">/02</span>
+                        </div>
+                        <p class="pricing-plan-desc">Para negocios que quieren una tienda completa y bien diseñada.</p>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-price-block">
+                            <span class="font-display pricing-price">$230.000</span>
+                            <span class="pricing-period">Pago único</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Hasta 35 productos</li>
+                            <li>Diseño con tu identidad visual</li>
+                            <li>Pagos, envíos e Instagram</li>
+                            <li>Optimización del perfil de tienda</li>
+                            <li>Entrega lista para usar</li>
+                        </ul>
+                    </article>
+
+                    <article class="reveal pricing-card" data-delay="3">
+                        <div class="pricing-card-top">
+                            <h3 class="font-display pricing-plan-name">Completa</h3>
+                            <span class="pricing-plan-num">/03</span>
+                        </div>
+                        <p class="pricing-plan-desc">Para catálogos grandes que necesitan más estructura y soporte.</p>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-price-block">
+                            <span class="font-display pricing-price">$280.000</span>
+                            <span class="pricing-period">Pago único</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Hasta 50 productos</li>
+                            <li>Todo lo del plan Pro</li>
+                            <li>Configuración avanzada</li>
+                            <li>Capacitación incluida</li>
+                            <li>Entrega lista para usar</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <p class="pricing-footnote">* También disponible como complemento a cualquier plan de redes sociales.</p>
+
+                <div class="reveal pricing-cta-row">
+                    <p class="font-display pricing-cta-text">
+                        <em>¿No sabés cuál opción es ideal para tu negocio? Escribime y te ayudo a elegir sin compromiso.</em>
+                    </p>
+                    <a href="#" class="btn-primary wa-link pricing-wa-btn" data-wa-msg="Hola Angi, me gustaría saber cuál plan de tienda online es el ideal para mi negocio. ¿Podemos conversar?">
+                        Escribime por WhatsApp
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 17L17 7" />
+                            <path d="M7 7h10v10" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- CASE STUDY -->
         <section id="caso" data-testid="casestudy-section" class="casestudy-section">
             <div class="container">
 
-                <!-- Header row: title + stats -->
+                <!-- Header: title + tags -->
                 <div class="casestudy-header">
                     <div class="casestudy-intro">
                         <p class="reveal section-marker casestudy-eyebrow">
                             <span class="marker-line"></span>
                             Caso de estudio
+                            <span class="cs-counter">01 / 04</span>
                         </p>
                         <h2 class="reveal font-display casestudy-heading" data-delay="1" data-testid="casestudy-heading">
                             Mueblería <em>Bravo</em>
                         </h2>
-                        <p class="reveal casestudy-subtitle" data-delay="2">De catálogo olvidado a marca con<br>intención, en 4 meses.</p>
+                        <p class="reveal casestudy-subtitle" data-delay="2">Creamos el feed y los reels que la mueblería necesitaba. Mirá el antes y después de su contenido digital.</p>
                     </div>
-                    <div class="reveal casestudy-stats" data-delay="2">
-                        <div class="cs-stat">
-                            <span class="cs-stat-label">Seguidores</span>
-                            <span class="font-display cs-stat-value cs-stat-italic">+180%</span>
-                        </div>
-                        <div class="cs-stat">
-                            <span class="cs-stat-label">Consultas DM</span>
-                            <span class="font-display cs-stat-value cs-stat-italic">3×</span>
-                        </div>
-                        <div class="cs-stat">
-                            <span class="cs-stat-label">Tiempo</span>
-                            <span class="font-display cs-stat-value">4 meses</span>
-                        </div>
+                    <div class="reveal casestudy-tags" data-delay="2">
+                        <span class="cs-tag">Dirección de contenido</span>
+                        <span class="cs-tag">Reels + Feed</span>
+                        <span class="cs-tag">Identidad Visual</span>
+                        <span class="cs-tag cs-tag--year">2024</span>
                     </div>
                 </div>
 
-                <!-- Horizontal timeline -->
-                <div class="casestudy-timeline-h">
-                    <div class="h-step reveal" data-delay="1" data-testid="casestudy-step-01">
-                        <div class="h-step-track">
-                            <span class="h-dot"></span>
-                            <span class="h-line"></span>
+                <!-- Before / After video comparison -->
+                <div class="casestudy-comparison">
+
+                    <div class="cv-side cv-side--before">
+                        <div class="cv-side-header">
+                            <span class="cv-badge cv-badge--before">Antes</span>
+                            <span class="cv-side-desc">Capturas sueltas, sin edición · 2023</span>
                         </div>
-                        <div class="h-step-content">
-                            <div class="step-meta">
-                                <span class="font-display step-number">/ 01</span>
-                                <span class="step-label">Contexto</span>
+                        <div class="cv-videos">
+                            <div class="reveal cv-card cv-card--before" data-delay="1" data-video-src="videos/caso/antes-01.mp4">
+                                <div class="cv-card-top-meta"><span class="cv-rec">REC ● 23:19</span></div>
+                                <button class="cv-play" aria-label="Reproducir video">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg>
+                                </button>
+                                <div class="cv-card-footer">
+                                    <span class="cv-filename">IMG_4521.MOV</span>
+                                    <span class="cv-filemeta">0:47 · 480p</span>
+                                </div>
                             </div>
-                            <h3 class="font-display step-title">Una mueblería con 22 años y cero identidad digital.</h3>
-                            <p class="step-body">Local hermoso, madera de primera, clientes fieles — pero en Instagram parecía un catálogo desordenado. La gente no entendía el valor.</p>
-                        </div>
-                    </div>
-                    <div class="h-step reveal" data-delay="2" data-testid="casestudy-step-02">
-                        <div class="h-step-track">
-                            <span class="h-dot"></span>
-                            <span class="h-line"></span>
-                        </div>
-                        <div class="h-step-content">
-                            <div class="step-meta">
-                                <span class="font-display step-number">/ 02</span>
-                                <span class="step-label">Lo que hicimos</span>
+                            <div class="reveal cv-card cv-card--before" data-delay="2" data-video-src="videos/caso/antes-02.mp4">
+                                <div class="cv-card-top-meta"><span class="cv-rec">REC ● 34:26</span></div>
+                                <button class="cv-play" aria-label="Reproducir video">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg>
+                                </button>
+                                <div class="cv-card-footer">
+                                    <span class="cv-filename">VID_20230612.mp4</span>
+                                    <span class="cv-filemeta">1:03 · vertical</span>
+                                </div>
                             </div>
-                            <h3 class="font-display step-title">Rediseño de identidad + sistema visual para redes.</h3>
-                            <p class="step-body">Nuevo logotipo, paleta neutra cálida, guía fotográfica propia y plantillas editoriales. Acompañé al equipo con un plan de contenido de 90 días.</p>
-                        </div>
-                    </div>
-                    <div class="h-step h-step--last reveal" data-delay="3" data-testid="casestudy-step-03">
-                        <div class="h-step-track">
-                            <span class="h-dot"></span>
-                        </div>
-                        <div class="h-step-content">
-                            <div class="step-meta">
-                                <span class="font-display step-number">/ 03</span>
-                                <span class="step-label">Resultados</span>
+                            <div class="reveal cv-card cv-card--before" data-delay="3" data-video-src="videos/caso/antes-03.mp4">
+                                <div class="cv-card-top-meta"><span class="cv-rec">REC ● 45:33</span></div>
+                                <button class="cv-play" aria-label="Reproducir video">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg>
+                                </button>
+                                <div class="cv-card-footer">
+                                    <span class="cv-filename">WhatsApp Video.mp4</span>
+                                    <span class="cv-filemeta">0:28 · sin editar</span>
+                                </div>
                             </div>
-                            <h3 class="font-display step-title">El feed empezó a contar lo que el local ya era.</h3>
-                            <p class="step-body">En 4 meses duplicaron consultas orgánicas y firmaron su primer contrato con un estudio de arquitectura.</p>
                         </div>
+                        <p class="cv-caption">Videos desordenados, sin criterio visual. Nadie llegaba a ver la calidad del producto.</p>
                     </div>
+
+                    <div class="cv-divider" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14" />
+                            <path d="M12 5l7 7-7 7" />
+                        </svg>
+                    </div>
+
+                    <div class="cv-side cv-side--after">
+                        <div class="cv-side-header">
+                            <span class="cv-badge cv-badge--after">Después</span>
+                            <span class="cv-side-desc">Reels con identidad propia · 2024</span>
+                        </div>
+                        <div class="cv-videos">
+                            <div class="reveal cv-card cv-card--after" data-delay="1" data-video-src="video/combo.mp4" data-video-poster="img/combo.jpg">
+                                <div class="cv-card-brand-badge">BRAVO<span class="cv-brand-dot"></span></div>
+                                <button class="cv-play" aria-label="Reproducir reel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg>
+                                </button>
+                                <div class="cv-card-footer">
+                                    <span class="cv-reel-title">Combo protagonista</span>
+                                    <span class="cv-reel-dur">REEL · 0:34</span>
+                                </div>
+                            </div>
+                            <div class="reveal cv-card cv-card--after" data-delay="2" data-video-src="videos/caso/despues-02.mp4">
+                                <div class="cv-card-brand-badge">BRAVO<span class="cv-brand-dot"></span></div>
+                                <button class="cv-play" aria-label="Reproducir reel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg>
+                                </button>
+                                <div class="cv-card-footer">
+                                    <span class="cv-reel-title">Del taller al living</span>
+                                    <span class="cv-reel-dur">REEL · 0:42</span>
+                                </div>
+                            </div>
+                            <div class="reveal cv-card cv-card--after" data-delay="3" data-video-src="videos/caso/despues-03.mp4">
+                                <div class="cv-card-brand-badge">BRAVO<span class="cv-brand-dot"></span></div>
+                                <button class="cv-play" aria-label="Reproducir reel">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg>
+                                </button>
+                                <div class="cv-card-footer">
+                                    <span class="cv-reel-title">Maderas nativas, historia propia</span>
+                                    <span class="cv-reel-dur">REEL · 0:58</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="cv-caption">Reels con dirección de arte, tipografía consistente y un guión claro. El producto empezó a hablar.</p>
+                    </div>
+
                 </div>
 
-                <!-- Images row -->
-                <div class="casestudy-images">
-                    <div class="reveal cs-img cs-img-before" data-delay="1" data-testid="casestudy-before">
-                        <div class="before-bg"></div>
-                        <div class="cs-img-badge">Antes</div>
-                    </div>
-                    <button class="reveal cs-video" data-delay="2" data-testid="casestudy-video">
-                        <div class="cs-video-label">Proceso · 0:45</div>
-                        <div class="cs-play-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <!-- Context section -->
+                <div class="casestudy-context">
+
+                    <div class="cs-context-stats">
+                        <div class="reveal cs-ctx-stat" data-delay="1">
+                            <span class="cs-ctx-counter">/01</span>
+                            <span class="font-display cs-ctx-num">+180%</span>
+                            <p class="cs-ctx-desc">Crecimiento de seguidores</p>
+                            <span class="cs-ctx-sub">En 4 meses</span>
                         </div>
-                    </button>
-                    <div class="reveal cs-img cs-img-after" data-delay="3" data-testid="casestudy-after">
-                        <img src="https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png" alt="Mueblería Bravo - Después" loading="lazy">
-                        <div class="cs-img-badge">Después</div>
+                        <div class="reveal cs-ctx-stat" data-delay="2">
+                            <span class="cs-ctx-counter">/02</span>
+                            <span class="font-display cs-ctx-num">3×</span>
+                            <p class="cs-ctx-desc">Consultas por DM</p>
+                            <span class="cs-ctx-sub">Mes a mes</span>
+                        </div>
+                        <div class="reveal cs-ctx-stat" data-delay="3">
+                            <span class="cs-ctx-counter">/03</span>
+                            <span class="font-display cs-ctx-num">4</span>
+                            <p class="cs-ctx-desc">Meses de acompañamiento</p>
+                            <span class="cs-ctx-sub">Identidad + Contenido</span>
+                        </div>
                     </div>
+
+                    <div class="cs-context-grid">
+                        <div class="reveal cs-context-col" data-delay="1">
+                            <p class="cs-context-label">El contexto</p>
+                            <h3 class="font-display cs-context-heading">Producto de primera, presencia digital olvidada.</h3>
+                            <p class="cs-context-body">Mueblería Bravo tenía un local hermoso, madera de calidad y clientes fieles desde hace dos décadas. Pero en Instagram subían capturas de celular sin edición ni hilo conductor. El feed no mostraba nada de lo que el local ya era.</p>
+                        </div>
+                        <div class="reveal cs-context-col" data-delay="2">
+                            <p class="cs-context-label">La transformación</p>
+                            <h3 class="font-display cs-context-heading">Un sistema de contenido que respira igual que el local.</h3>
+                            <ul class="cs-transform-list">
+                                <li>Dirección de arte para reels: luz, encuadre y ritmo.</li>
+                                <li>Guión y copy para cada pieza, alineados al tono de marca.</li>
+                                <li>Plan de contenido de 90 días con calendario editorial.</li>
+                                <li>Acompañamiento al equipo para sostener el ritmo sin mí.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="reveal cs-quote-block" data-delay="1">
+                        <div class="cs-quote-content">
+                            <blockquote class="font-display cs-quote-text">"En 4 meses firmamos con un estudio de arquitectura. Ahora nos llaman antes de abrir."</blockquote>
+                            <cite class="cs-quote-cite">— Equipo Bravo</cite>
+                        </div>
+                        <a href="#" class="cs-quote-cta wa-link" data-wa-msg="Hola Angi, quiero contenido así para mi marca. ¿Podemos hablar?">
+                            Quiero contenido así para mi marca
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7" />
+                                <path d="M7 7h10v10" />
+                            </svg>
+                        </a>
+                    </div>
+
                 </div>
 
             </div>
@@ -320,76 +702,32 @@
                 </div>
 
                 <div class="portfolio-grid">
-                    <a href="#"
-                        class="portfolio-item reveal"
-                        data-delay="1"
-                        data-testid="portfolio-item-bravo-1"
-                        style="--col-span:8; aspect-ratio:5/4;"
-                        data-name="Mueblería Bravo"
-                        data-number="01"
-                        data-type="Identidad · Contenido"
-                        data-year="2024"
-                        data-desc="Rediseño completo de identidad para una mueblería con 22 años de historia. Nuevo logotipo, sistema de colores, guía fotográfica y plan de contenido para Instagram."
-                        data-tags="Identidad Visual,Redes Sociales,Estrategia de Marca"
-                        data-media='[{"type":"image","src":"https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png","alt":"Mueblería Bravo - Identidad"},{"type":"video","src":"URL_DEL_VIDEO_ACÁ","poster":"URL_THUMBNAIL_OPCIONAL"}]'>
-                        <img src="https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png" alt="Mueblería Bravo" class="media">
+                    <a href="#" class="portfolio-item reveal" data-delay="1" data-testid="portfolio-item-bravo-1" style="--col-span:8; aspect-ratio:5/4;" data-name="Mueblería Bravo" data-number="01" data-type="Identidad · Contenido" data-year="2024" data-desc="Rediseño completo de identidad para una mueblería con 22 años de historia. Nuevo logotipo, sistema de colores, guía fotográfica y plan de contenido para Instagram." data-tags="Identidad Visual,Redes Sociales,Estrategia de Marca" data-media='[{"type":"image","src":"https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png","alt":"Mueblería Bravo - Identidad"},{"type":"video","src":"URL_DEL_VIDEO_ACÁ","poster":"URL_THUMBNAIL_OPCIONAL"}]'>
+                        <div class="media-wrap"><img src="https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png" alt="Mueblería Bravo" class="media"></div>
                         <div class="overlay">
                             <p class="overlay-type">Identidad · Contenido</p>
                             <h3 class="font-display overlay-name">Mueblería Bravo</h3>
                         </div>
                         <span class="portfolio-number">01</span>
                     </a>
-                    <a href="#"
-                        class="portfolio-item reveal"
-                        data-delay="2"
-                        data-testid="portfolio-item-silvestre"
-                        style="--col-span:4; aspect-ratio:4/5;"
-                        data-name="Silvestre"
-                        data-number="02"
-                        data-type="Marca · Floristería"
-                        data-year="2023"
-                        data-desc="Construcción de marca desde cero para una floristería boutique. Paleta botánica, tipografía artesanal y sistema de identidad aplicado a packaging y redes sociales."
-                        data-tags="Branding,Identidad Visual,Packaging"
-                        data-media='[{"type":"image","src":"https://images.unsplash.com/photo-1676050604071-2f741337923b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwZmxvd2VyJTIwc3RlbSUyMGFyY2hpdGVjdHVyYWx8ZW58MHx8fHwxNzc2NDE1MTE2fDA&ixlib=rb-4.1.0&q=85","alt":"Silvestre - Marca"}]'>
-                        <img src="https://images.unsplash.com/photo-1676050604071-2f741337923b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwZmxvd2VyJTIwc3RlbSUyMGFyY2hpdGVjdHVyYWx8ZW58MHx8fHwxNzc2NDE1MTE2fDA&ixlib=rb-4.1.0&q=85" alt="Silvestre" class="media">
+                    <a href="#" class="portfolio-item reveal" data-delay="2" data-testid="portfolio-item-silvestre" style="--col-span:4; aspect-ratio:4/5;" data-name="Silvestre" data-number="02" data-type="Marca · Floristería" data-year="2023" data-desc="Construcción de marca desde cero para una floristería boutique. Paleta botánica, tipografía artesanal y sistema de identidad aplicado a packaging y redes sociales." data-tags="Branding,Identidad Visual,Packaging" data-media='[{"type":"image","src":"https://images.unsplash.com/photo-1676050604071-2f741337923b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwZmxvd2VyJTIwc3RlbSUyMGFyY2hpdGVjdHVyYWx8ZW58MHx8fHwxNzc2NDE1MTE2fDA&ixlib=rb-4.1.0&q=85","alt":"Silvestre - Marca"}]'>
+                        <div class="media-wrap"><img src="https://images.unsplash.com/photo-1676050604071-2f741337923b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwZmxvd2VyJTIwc3RlbSUyMGFyY2hpdGVjdHVyYWx8ZW58MHx8fHwxNzc2NDE1MTE2fDA&ixlib=rb-4.1.0&q=85" alt="Silvestre" class="media"></div>
                         <div class="overlay">
                             <p class="overlay-type">Marca · Floristería</p>
                             <h3 class="font-display overlay-name">Silvestre</h3>
                         </div>
                         <span class="portfolio-number">02</span>
                     </a>
-                    <a href="#"
-                        class="portfolio-item reveal"
-                        data-delay="3"
-                        data-testid="portfolio-item-pausa"
-                        style="--col-span:5; aspect-ratio:1/1;"
-                        data-name="Pausa"
-                        data-number="03"
-                        data-type="Marca · Café"
-                        data-year="2023"
-                        data-desc="Marca para un café de especialidad en Rosario. El nombre y la identidad visual transmiten esa pausa necesaria en el día. Aplicaciones en menú, packaging y señalética."
-                        data-tags="Branding,Naming,Señalética"
-                        data-media='[{"type":"image","src":"https://images.unsplash.com/photo-1676446547562-613597f00cf7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwY2VyYW1pYyUyMGNvZmZlZSUyMGN1cCUyMGVzcHJlc3NvfGVufDB8fHx8MTc3NjQxNTEyN3ww&ixlib=rb-4.1.0&q=85","alt":"Pausa - Café"}]'>
-                        <img src="https://images.unsplash.com/photo-1676446547562-613597f00cf7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwY2VyYW1pYyUyMGNvZmZlZSUyMGN1cCUyMGVzcHJlc3NvfGVufDB8fHx8MTc3NjQxNTEyN3ww&ixlib=rb-4.1.0&q=85" alt="Pausa" class="media">
+                    <a href="#" class="portfolio-item reveal" data-delay="3" data-testid="portfolio-item-pausa" style="--col-span:5; aspect-ratio:1/1;" data-name="Pausa" data-number="03" data-type="Marca · Café" data-year="2023" data-desc="Marca para un café de especialidad en Rosario. El nombre y la identidad visual transmiten esa pausa necesaria en el día. Aplicaciones en menú, packaging y señalética." data-tags="Branding,Naming,Señalética" data-media='[{"type":"image","src":"https://images.unsplash.com/photo-1676446547562-613597f00cf7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwY2VyYW1pYyUyMGNvZmZlZSUyMGN1cCUyMGVzcHJlc3NvfGVufDB8fHx8MTc3NjQxNTEyN3ww&ixlib=rb-4.1.0&q=85","alt":"Pausa - Café"}]'>
+                        <div class="media-wrap"><img src="https://images.unsplash.com/photo-1676446547562-613597f00cf7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwY2VyYW1pYyUyMGNvZmZlZSUyMGN1cCUyMGVzcHJlc3NvfGVufDB8fHx8MTc3NjQxNTEyN3ww&ixlib=rb-4.1.0&q=85" alt="Pausa" class="media"></div>
                         <div class="overlay">
                             <p class="overlay-type">Marca · Café</p>
                             <h3 class="font-display overlay-name">Pausa</h3>
                         </div>
                         <span class="portfolio-number">03</span>
                     </a>
-                    <a href="#"
-                        class="portfolio-item reveal"
-                        data-delay="4"
-                        data-testid="portfolio-item-bravo-2"
-                        style="--col-span:7; aspect-ratio:16/10;"
-                        data-name="Mueblería Bravo"
-                        data-number="04"
-                        data-type="Editorial · Lookbook"
-                        data-year="2024"
-                        data-desc="Producción editorial y diseño de lookbook para la temporada 2024. Dirección de arte, selección de producto y diseño de pieza impresa y digital."
-                        data-tags="Editorial,Fotografía,Dirección de Arte"
-                        data-media='[{"type":"image","src":"https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png","alt":"Mueblería Bravo - Lookbook"}]'>
-                        <img src="https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png" alt="Mueblería Bravo Lookbook" class="media">
+                    <a href="#" class="portfolio-item reveal" data-delay="4" data-testid="portfolio-item-bravo-2" style="--col-span:7; aspect-ratio:16/10;" data-name="Mueblería Bravo" data-number="04" data-type="Editorial · Lookbook" data-year="2024" data-desc="Producción editorial y diseño de lookbook para la temporada 2024. Dirección de arte, selección de producto y diseño de pieza impresa y digital." data-tags="Editorial,Fotografía,Dirección de Arte" data-media='[{"type":"image","src":"https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png","alt":"Mueblería Bravo - Lookbook"}]'>
+                        <div class="media-wrap"><img src="https://static.prod-images.emergentagent.com/jobs/0edcabd4-3424-4f3f-8296-6467fe48539c/images/e99998b88e6da5edbe6eee7ce2d6bfefc86b02be6b25b8c6ae76f3c137bbdc70.png" alt="Mueblería Bravo Lookbook" class="media"></div>
                         <div class="overlay">
                             <p class="overlay-type">Editorial · Lookbook</p>
                             <h3 class="font-display overlay-name">Mueblería Bravo</h3>
@@ -460,7 +798,7 @@
                 </p>
                 <h2 class="reveal font-display finalcta-heading" data-delay="1" data-testid="finalcta-heading">
                     ¿Tu negocio está listo<br>
-                    para verse como <em>lo que es</em>?
+                    para verse como lo que <em>realmente es</em>?
                 </h2>
                 <p class="reveal finalcta-subtext" data-delay="2">
                     Escribime y conversemos sin compromiso. Cuéntame qué hacés, qué querés mostrar, y vemos juntas por dónde empezar.
@@ -468,7 +806,10 @@
                 <div class="reveal finalcta-buttons" data-delay="3">
                     <a href="#" class="finalcta-primary-btn wa-link" data-testid="finalcta-whatsapp" data-wa-msg="Hola Angi, creo que mi negocio está listo para verse como lo que es. ¿Empezamos?">
                         Escribime por WhatsApp
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 17L17 7" />
+                            <path d="M7 7h10v10" />
+                        </svg>
                     </a>
                     <a href="mailto:hola@angireina.com" class="text-link finalcta-email" data-testid="finalcta-email">
                         hola@angireina.com
@@ -525,11 +866,182 @@
         </div>
     </footer>
 
+    <!-- SERVICES MODAL -->
+    <div id="serviceModal" class="pmodal-overlay smodal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="pmodal smodal" id="smodalPanel">
+            <button class="pmodal-close" id="smodalClose" aria-label="Cerrar detalle del servicio">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="smodal-aside">
+                <div class="smodal-meta">
+                    <span class="smodal-number" id="smodalNumber"></span>
+                    <span class="smodal-type" id="smodalType"></span>
+                </div>
+
+                <p class="smodal-label smodal-label-light">Lo que vas a destrabar</p>
+                <h2 class="font-display smodal-hook" id="smodalHook"></h2>
+
+                <div class="smodal-preview" id="smodalPreview" aria-hidden="true">
+                    <div class="smodal-preview-visual is-active" data-visual="branding">
+                        <div class="svisual-brand-sheet">
+                            <span class="svisual-brand-word">REINA</span>
+                            <div class="svisual-brand-swatches">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="svisual-brand-lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="svisual-brand-card">
+                            <span>Logo</span>
+                            <span>Sistema</span>
+                            <span>Manual</span>
+                        </div>
+                    </div>
+
+                    <div class="smodal-preview-visual" data-visual="content">
+                        <div class="svisual-phone">
+                            <div class="svisual-phone-camera"></div>
+                            <div class="svisual-feed-hero"></div>
+                            <div class="svisual-feed-lines">
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="svisual-feed-grid">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="svisual-stat-pill">12 piezas / mes</div>
+                    </div>
+
+                    <div class="smodal-preview-visual" data-visual="strategy">
+                        <div class="svisual-board">
+                            <div class="svisual-board-head">
+                                <span>POSICIONAMIENTO</span>
+                                <span>VOZ</span>
+                            </div>
+                            <div class="svisual-board-grid">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="svisual-note svisual-note-primary">Mensaje clave</div>
+                        <div class="svisual-note svisual-note-secondary">Cliente ideal</div>
+                    </div>
+
+                    <div class="smodal-preview-visual" data-visual="video">
+                        <div class="svisual-reel">
+                            <span class="svisual-rec">REC 00:18</span>
+                            <span class="svisual-play"></span>
+                            <span class="svisual-caption">Guion + encuadre + edici&oacute;n</span>
+                            <span class="svisual-progress"></span>
+                        </div>
+                        <div class="svisual-video-card">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="smodal-preview-visual" data-visual="shop">
+                        <div class="svisual-browser">
+                            <div class="svisual-browser-bar">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="svisual-shop-hero"></div>
+                            <div class="svisual-shop-grid">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="svisual-shop-cta"></div>
+                        </div>
+                    </div>
+
+                    <div class="smodal-preview-visual" data-visual="design">
+                        <div class="svisual-paper-stack">
+                            <div class="svisual-paper svisual-paper-back"></div>
+                            <div class="svisual-paper svisual-paper-mid"></div>
+                            <div class="svisual-paper svisual-paper-front">
+                                <span class="svisual-paper-kicker">PIEZA</span>
+                                <span class="svisual-paper-title">CATALOGO</span>
+                                <span class="svisual-paper-line"></span>
+                            </div>
+                        </div>
+                        <div class="svisual-chip-row">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="smodal-includes" id="smodalIncludes"></ul>
+            </div>
+
+            <div class="pmodal-info smodal-info">
+                <h2 class="font-display smodal-name" id="smodalName"></h2>
+                <p class="smodal-desc" id="smodalDesc"></p>
+
+                <div class="smodal-section">
+                    <p class="smodal-label">Ideal para</p>
+                    <p class="smodal-copy" id="smodalIdeal"></p>
+                </div>
+
+                <div class="smodal-section">
+                    <p class="smodal-label">C&oacute;mo lo trabajamos</p>
+                    <p class="smodal-copy" id="smodalApproach"></p>
+                </div>
+
+                <ul class="pmodal-tags smodal-tags" id="smodalTags"></ul>
+
+                <a href="#" class="btn-primary wa-link smodal-cta" id="smodalCta" data-wa-msg="Hola Angi, quiero consultar por este servicio.">
+                    Quiero conversar sobre este servicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CASE VIDEO MODAL -->
+    <div id="caseVideoModal" class="pmodal-overlay cvmodal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="cvmodal" id="cvmodalPanel">
+            <button class="pmodal-close cvmodal-close" id="cvmodalClose" aria-label="Cerrar video">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="cvmodal-frame">
+                <video id="cvmodalVideo" class="cvmodal-video" controls playsinline preload="metadata"></video>
+            </div>
+
+            <div class="cvmodal-info">
+                <p class="cvmodal-kicker" id="cvmodalKicker"></p>
+                <h3 class="font-display cvmodal-title" id="cvmodalTitle"></h3>
+            </div>
+        </div>
+    </div>
+
     <!-- PORTFOLIO MODAL -->
     <div id="portfolioModal" class="pmodal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="pmodal" id="pmodalPanel">
             <button class="pmodal-close" id="pmodalClose" aria-label="Cerrar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
             </button>
 
             <!-- Media: imágenes y videos se inyectan aquí -->
@@ -551,4 +1063,5 @@
 
     <script src="main.js"></script>
 </body>
+
 </html>

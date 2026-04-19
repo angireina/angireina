@@ -5,6 +5,88 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.
 
 ---
 
+## [1.11.0] — 2026-04-19
+
+### Añadido
+- Toggle de **modo claro / oscuro** en la barra de navegación: ícono luna/sol con `aria-label` dinámico y atributo `aria-pressed` sincronizado
+- Script anti-flash en el `<head>` que lee `localStorage` y aplica el tema antes del primer render, evitando el parpadeo al recargar
+- Persistencia del tema seleccionado en `localStorage` con clave `reina-theme`
+- Soporte de `color-scheme` a nivel de `<html>` para que el navegador adapte scrollbars y controles nativos al tema activo
+
+---
+
+## [1.10.0] — 2026-04-18
+
+### Añadido
+- Modal contextual para las cards de **Servicios**, con información ampliada, entregables, tags, CTA y navegación por teclado
+- Sistema de mini mockups por servicio dentro del modal, para reforzar visualmente cada propuesta
+- Visor de video centrado para la sección **Caso de estudio**, con controles nativos, soporte de fullscreen y volumen ajustable
+- Soporte para vincular assets reales de video y portada en las cards del caso mediante `data-video-src` y `data-video-poster`
+
+### Cambiado
+- Las cards de **Servicios** ahora funcionan como disparadores interactivos del modal sin alterar la grilla base
+- La experiencia de video del caso pasó de mini reproductor inline a preview estático + popup vertical más grande, consistente en mobile, tablet y desktop
+- La primera card de "Después" del caso ahora usa `video/combo.mp4` con portada `img/combo.jpg`
+- El volumen inicial del visor de video quedó configurado al 35%
+- Hover de las cards de video del caso ajustado para responder más rápido y con menos delay
+
+### Corregido
+- Se corrigió el bug de desktop en **Portfolio** donde las cards encogían al finalizar el reveal; la grilla ahora conserva correctamente el `span` definido por variable CSS
+- Se eliminó la falsa sensación de reproducción en el estado inicial de las cards del caso, removiendo la barra visual de progreso del preview
+- El reveal del portfolio ya no depende de mutaciones de estilos inline que rompían el layout al completarse la animación
+
+---
+
+## [1.9.0] — 2026-04-18
+
+### Añadido
+- Fuentes **auto-hospedadas**: Playfair Display (Regular, Italic, SemiBold) y Poppins (Regular, Medium, SemiBold, Bold) servidas como `.woff2` desde `fonts/` — eliminada la dependencia a Google Fonts
+- Nuevas variables de color: `--reina-pear-pastel: #eaf48e`, `--reina-eggplant: #4c2e7a`, `--reina-carbon: #2b2b2b`
+- Favicon PNG de respaldo (`img/favicon.png`) para navegadores que no soportan SVG
+
+### Cambiado
+- `--reina-violet` actualizado de `#a88aed` a `#9f78ff`; `--reina-violet-dark` de `#8f6fe0` a `#6d4dbc`
+- Grid de servicios en tablet: pasa de 3 columnas a 2 columnas para mejor legibilidad
+- `min-height` de las cards de servicio reducido de 380px a 320px
+- Las cards de servicios y pricing tienen ahora transición suave para transform, box-shadow y border-color
+
+### Corregido
+- Listener `transitionend` en `main.js` que resetea el `transitionDelay` a `0ms` tras el reveal, evitando que el delay de animación interfiera con los hovers posteriores
+- Imagen de portfolio usa `position: absolute; inset: 0` para cubrir correctamente el contenedor sin desbordarse
+
+---
+
+## [1.8.0] — 2026-04-18
+
+### Añadido
+- Sección **Planes · Contenido** (`#planes-contenido`) con tres planes mensuales: Presencia ($220.000), Crecimiento ($300.000) y Expansión ($420.000)
+- Sección **Tienda Online · Planes** (`#tienda-online`) con tres planes de pago único: Básica ($180.000), Pro ($230.000) y Completa ($280.000)
+- Badge "Más elegido" en las cards de plan destacado de cada sección de precios
+- CTA de WhatsApp contextual al pie de cada sección de precios con mensaje propio
+- Nota legal al pie de cada sección de precios (viáticos, complementos)
+- Carpeta `fonts/` al proyecto
+
+### Cambiado
+- Caso de estudio ampliado con sección de contexto narrativo (`casestudy-context`): estadísticas de resultado (+180%, 3×, 4 meses), columnas "El contexto" / "La transformación" y bloque de cita con CTA
+
+---
+
+## [1.7.0] — 2026-04-18
+
+### Añadido
+- Tres nuevos servicios: **Producción Audiovisual** (/ 04), **Tienda Online** (/ 05) y **Diseño Gráfico** (/ 06)
+- Comparación visual Antes/Después en la sección Caso de estudio: tarjetas de video estilizadas que muestran material original vs. reels producidos
+- Contador de casos (`01 / 04`) en el eyebrow de la sección de caso de estudio
+- Tags de categoría (`cs-tag`) que reemplazan las estadísticas de resultados en el header del caso
+
+### Cambiado
+- Servicio 02 renombrado de "Contenido para Redes" a **"Gestión de Redes"** — nueva descripción y tags (Instagram, TikTok, Community)
+- Texto introductorio de Servicios: "Tres formas" → "Seis formas de trabajar juntas"
+- Sección Caso de estudio rediseñada por completo: se eliminaron las estadísticas de resultados (+180%, 3×) y el timeline horizontal de tres pasos; en su lugar una comparación editorial Antes/Después con cita de cliente y CTA
+- Grid de servicios en desktop ahora muestra 3 columnas × 2 filas (antes era una sola fila de 3)
+
+---
+
 ## [1.6.0] — 2026-04-18
 
 ### Añadido

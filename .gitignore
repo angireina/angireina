@@ -1,0 +1,10 @@
+# Claude Code session files
+.claude/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+*.swp
