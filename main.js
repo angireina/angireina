@@ -299,25 +299,52 @@ const mobileModalHistory = (() => {
         });
     }
 
+    function getServiceModalTemplate(card) {
+        const template = card.nextElementSibling;
+        return template && template.matches('.service-modal-template') ? template.content : null;
+    }
+
+    function getTemplateText(template, selector, fallback = '') {
+        const value = template?.querySelector(selector)?.textContent.trim();
+        return value || fallback;
+    }
+
+    function getTemplateList(template, selector, fallback = []) {
+        const items = Array.from(template?.querySelectorAll(`${selector} li`) || [])
+            .map((item) => item.textContent.trim())
+            .filter(Boolean);
+
+        return items.length ? items : fallback;
+    }
+
     function openModal(card) {
+        const modalTemplate = getServiceModalTemplate(card);
         const number = card.querySelector('.service-number')?.textContent.trim() || '';
-        const name = card.querySelector('.service-title')?.textContent.trim() || '';
-        const desc = card.querySelector('.service-desc')?.textContent.trim() || '';
-        const tags = Array.from(card.querySelectorAll('.service-tags li')).map((tag) => tag.textContent.trim());
-        const includes = card.dataset.serviceIncludes ?
+        const fallbackName = card.querySelector('.service-title')?.textContent.trim() || '';
+        const fallbackDesc = card.querySelector('.service-desc')?.textContent.trim() || '';
+        const fallbackTags = Array.from(card.querySelectorAll('.service-tags li')).map((tag) => tag.textContent.trim());
+        const fallbackIncludes = card.dataset.serviceIncludes ?
             card.dataset.serviceIncludes.split(',').map((item) => item.trim()).filter(Boolean) :
             [];
+        const name = getTemplateText(modalTemplate, '[data-service-modal-name]', fallbackName);
+        const desc = getTemplateText(modalTemplate, '[data-service-modal-desc]', fallbackDesc);
+        const tags = getTemplateList(modalTemplate, '[data-service-modal-tags]', fallbackTags);
+        const includes = getTemplateList(modalTemplate, '[data-service-modal-includes]', fallbackIncludes);
         const visual = card.dataset.serviceVisual || 'branding';
 
         lastTrigger = card;
         numberEl.textContent = number;
-        typeEl.textContent = card.dataset.serviceType || '';
-        hookEl.textContent = card.dataset.serviceHook || '';
+        typeEl.textContent = getTemplateText(modalTemplate, '[data-service-modal-type]', card.dataset.serviceType || '');
+        hookEl.textContent = getTemplateText(modalTemplate, '[data-service-modal-hook]', card.dataset.serviceHook || '');
         nameEl.textContent = name;
         descEl.textContent = desc;
-        idealEl.textContent = card.dataset.serviceIdeal || '';
-        approachEl.textContent = card.dataset.serviceApproach || '';
-        ctaEl.dataset.waMsg = card.dataset.serviceWaMsg || `Hola Angi, quiero consultar por ${name}.`;
+        idealEl.textContent = getTemplateText(modalTemplate, '[data-service-modal-ideal]', card.dataset.serviceIdeal || '');
+        approachEl.textContent = getTemplateText(modalTemplate, '[data-service-modal-approach]', card.dataset.serviceApproach || '');
+        ctaEl.dataset.waMsg = getTemplateText(
+            modalTemplate,
+            '[data-service-modal-wa-msg]',
+            card.dataset.serviceWaMsg || `Hola Angi, quiero consultar por ${name}.`
+        );
 
         renderList(includesEl, includes);
         renderList(tagsEl, tags);

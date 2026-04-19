@@ -15,7 +15,7 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 | **Nav** | Navegacion principal con menu hamburguesa en mobile, toggle de tema y estado sticky solo en desktop |
 | **Hero** | Presentacion principal con titular, descripcion, estadisticas y CTAs |
 | **El problema real** | Seccion editorial con citas que conectan con dolores concretos del cliente ideal |
-| **Servicios** | Seis cards de servicio con modal contextual, entregables, CTA y visual propio por servicio |
+| **Servicios** | Seis cards de servicio con modal contextual, entregables, CTA, visual propio por servicio y contenido editable debajo de cada card |
 | **Planes - Contenido** | Tres planes mensuales para gestion de redes |
 | **Tienda Online - Planes** | Tres planes para armado de tienda en Tiendanube o Shopify |
 | **Caso de estudio** | Caso real con comparativa antes/despues, narrativa, resultados y cards de video |
@@ -89,18 +89,30 @@ Cada boton usa `data-wa-msg` con el texto a enviar. Se edita directamente en `in
 
 ### Editar contenido de los modales de servicios
 
-Cada card de servicio expone su contenido mediante atributos `data-service-*` en `index.html`.
+Cada card de servicio tiene ahora su bloque editable justo debajo en `index.html`, usando esta estructura:
 
-Desde ahi podes cambiar:
+```html
+<article class="service-card">...</article>
 
-- titulo y subtitulo
-- hook principal
-- descripcion ampliada
-- entregables
-- enfoque de trabajo
-- tags
-- variante visual / mockup
-- mensaje contextual de WhatsApp
+<!-- MODAL CARD X -->
+<template class="service-modal-template">
+  ...
+</template>
+```
+
+Dentro de cada `template` vas a encontrar comentarios y nodos separados para editar el modal de esa card sin tocar JavaScript:
+
+- `data-service-modal-type`
+- `data-service-modal-hook`
+- `data-service-modal-name`
+- `data-service-modal-desc`
+- `data-service-modal-includes`
+- `data-service-modal-ideal`
+- `data-service-modal-approach`
+- `data-service-modal-tags`
+- `data-service-modal-wa-msg`
+
+`main.js` toma el contenido del `template` que esta inmediatamente debajo de cada card y lo inyecta en el modal global al hacer click.
 
 ### Ajustar visuales de los servicios
 

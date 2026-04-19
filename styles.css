@@ -847,33 +847,6 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
     transition: transform 500ms ease;
 }
 
-.hero-stats {
-    margin-top: 4rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    max-width: 32rem;
-}
-
-.stat {
-    display: flex;
-    flex-direction: column;
-}
-
-.stat-number {
-    font-size: 1.875rem;
-    color: var(--reina-dark);
-    line-height: 1.1;
-}
-
-.stat-label {
-    margin-top: 0.25rem;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: rgba(26, 26, 46, 0.6);
-}
-
 /* Hero image */
 .hero-image-wrapper {
     order: -1;
@@ -999,10 +972,6 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
     .hero-ctas {
         flex-direction: row;
         align-items: center;
-    }
-
-    .hero-stats {
-        margin-top: 6rem;
     }
 
     .hero-scroll-hint {
@@ -1139,6 +1108,30 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.25rem;
+}
+
+.services-grid [data-testid="service-card-01"] {
+    order: 1;
+}
+
+.services-grid [data-testid="service-card-03"] {
+    order: 2;
+}
+
+.services-grid [data-testid="service-card-06"] {
+    order: 3;
+}
+
+.services-grid [data-testid="service-card-04"] {
+    order: 4;
+}
+
+.services-grid [data-testid="service-card-02"] {
+    order: 5;
+}
+
+.services-grid [data-testid="service-card-05"] {
+    order: 6;
 }
 
 .service-card {
@@ -3713,7 +3706,6 @@ html[data-theme="dark"] .pmodal-close:hover {
 }
 
 html[data-theme="dark"] .hero-headline,
-html[data-theme="dark"] .stat-number,
 html[data-theme="dark"] .name-card-name,
 html[data-theme="dark"] .services-heading,
 html[data-theme="dark"] .service-title,
@@ -3734,7 +3726,6 @@ html[data-theme="dark"] .smodal-name {
 
 html[data-theme="dark"] .hero-eyebrow,
 html[data-theme="dark"] .hero-subhead,
-html[data-theme="dark"] .stat-label,
 html[data-theme="dark"] .name-card-label,
 html[data-theme="dark"] .hero-scroll-hint,
 html[data-theme="dark"] .services-eyebrow,
