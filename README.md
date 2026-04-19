@@ -1,101 +1,128 @@
-# REINA · Angi Reina
+# REINA - Angi Reina
 
-Landing page personal de **Angi Reina**, diseñadora gráfica y community manager radicada en Rosario, Argentina. El sitio presenta su propuesta de valor, servicios, planes de precios, caso de estudio, portfolio y canales de contacto.
+Landing page personal de **Angi Reina**, disenadora grafica y community manager radicada en Rosario, Argentina. El sitio presenta su propuesta de valor, servicios, planes, caso de estudio, portfolio y canales de contacto.
 
 ---
 
-## ¿Qué hace este sitio?
+## Que hace este sitio
 
-La página está pensada como herramienta de captación y presentación de marca personal. Su objetivo es comunicar claramente quién es Angi, qué hace y por qué vale la pena trabajar con ella — guiando al visitante desde la presentación hasta el contacto directo por WhatsApp.
+La pagina funciona como herramienta de presentacion y captacion para la marca personal de Angi. La experiencia esta pensada para llevar al visitante desde la propuesta de valor hasta el contacto directo por WhatsApp o email, con una narrativa visual consistente y una UX cuidada en desktop, tablet y mobile.
 
 ### Secciones
 
-| Sección | Descripción |
+| Seccion | Descripcion |
 |---|---|
-| **Nav** | Barra de navegación fija con scroll suave, menú hamburguesa en mobile y botón de acceso directo al contacto |
-| **Hero** | Presentación principal con titular, descripción, estadísticas de experiencia (+6 años, +40 marcas) y llamados a la acción |
-| **El problema real** | Sección de identificación con el cliente ideal a través de citas que reflejan sus dolores |
-| **Servicios** | Seis servicios: Identidad Visual, Gestión de Redes, Estrategia de Marca, Producción Audiovisual, Tienda Online y Diseño Gráfico. Cada card abre un modal con información ampliada, entregables, CTA y mini mockup propio |
-| **Planes · Contenido** | Tres planes mensuales de gestión de redes: Presencia, Crecimiento y Expansión |
-| **Tienda Online · Planes** | Tres planes de tienda e-commerce: Básica, Pro y Completa (Tiendanube / Shopify) |
-| **Caso de estudio** | Caso real (Mueblería Bravo) con comparación editorial Antes/Después de contenido, métricas de resultado, contexto narrativo, cita de cliente y cards de video que abren un visor vertical centrado con controles nativos |
-| **Portfolio** | Grilla asimétrica con trabajos recientes. Cada item abre un modal con información detallada del proyecto y media ampliada |
-| **Sobre mí** | Presentación personal con bio, filosofía de trabajo y estado de agenda |
-| **Contacto (CTA)** | Llamado a la acción final con acceso directo a WhatsApp y email |
-| **Footer** | Logo SVG, navegación secundaria y datos de contacto completos |
+| **Nav** | Navegacion principal con menu hamburguesa en mobile, toggle de tema y estado sticky solo en desktop |
+| **Hero** | Presentacion principal con titular, descripcion, estadisticas y CTAs |
+| **El problema real** | Seccion editorial con citas que conectan con dolores concretos del cliente ideal |
+| **Servicios** | Seis cards de servicio con modal contextual, entregables, CTA y visual propio por servicio |
+| **Planes - Contenido** | Tres planes mensuales para gestion de redes |
+| **Tienda Online - Planes** | Tres planes para armado de tienda en Tiendanube o Shopify |
+| **Caso de estudio** | Caso real con comparativa antes/despues, narrativa, resultados y cards de video |
+| **Portfolio** | Grilla asimetrica con modal por proyecto y media ampliada |
+| **Sobre mi** | Bio, filosofia de trabajo y disponibilidad |
+| **Contacto (CTA)** | Bloque final de cierre con acceso directo a WhatsApp y email |
+| **Footer** | Navegacion secundaria, marca y datos de contacto |
 
 ---
 
-## Tecnologías
+## Interacciones y UX
 
-El sitio está construido íntegramente con tecnologías web nativas, sin frameworks ni dependencias:
+- El sitio arranca en **modo claro por defecto**. Si existe una preferencia previa en `localStorage` (`reina-theme`), se respeta.
+- El toggle de tema actualiza `data-theme`, sincroniza `aria-label` y `aria-pressed`, y evita flash inicial con un script en el `<head>`.
+- En mobile hay un boton flotante para **volver arriba** cuando el usuario ya hizo scroll.
+- El navbar deja de comportarse como sticky en mobile; el estado `scrolled` queda reservado a desktop.
+- En dispositivos touch, los hover de cards se limitan a desktop y los botones responden con estados `:active`.
+- Los modales de servicios, portfolio y video integran historial del navegador en mobile: el gesto o boton de **back** cierra primero el popup abierto.
+- Los modales de servicios y portfolio fueron ajustados para mejorar legibilidad, scroll y espacio util en mobile.
 
-- **HTML5** — estructura semántica
-- **CSS3** — variables custom, CSS Grid, animaciones, transiciones y diseño responsive
-- **JavaScript vanilla** — scroll reveal con IntersectionObserver, menú mobile, modales de servicios/portfolio/video, mensajes de WhatsApp contextuales y toggle de tema claro/oscuro con persistencia en `localStorage`
-- **Fuentes auto-hospedadas** — Playfair Display y Poppins servidas como `.woff2` desde `fonts/`, sin dependencia a Google Fonts
+---
 
-No requiere instalación, build ni servidor. Se abre directamente en el navegador.
+## Tecnologias
+
+El sitio esta construido integramente con tecnologias web nativas, sin frameworks ni dependencias externas:
+
+- **HTML5** para estructura semantica
+- **CSS3** para layout responsive, variables, animaciones, estados y theming
+- **JavaScript vanilla** para scroll reveal, menu mobile, modales, WhatsApp contextual, tema claro/oscuro, boton mobile de volver arriba e integracion con History API en modales mobile
+- **Fuentes auto-hospedadas**: Playfair Display y Poppins servidas como `.woff2` desde `fonts/`
+
+No requiere build. Se puede abrir `index.html` directamente en el navegador.
 
 ---
 
 ## Estructura de archivos
 
-```
+```text
 landing-vanilla/
-├── index.html         — estructura de la página
-├── styles.css         — todos los estilos
-├── main.js            — interacciones y animaciones
-├── img/
-│   ├── logo_reina.svg — logo (usado en nav y footer)
-│   ├── favicon.svg    — ícono del navegador
-│   ├── favicon.png    — fallback para navegadores sin soporte SVG
-│   └── combo.jpg      — portada real usada en una card del caso de estudio
-├── fonts/             — Playfair Display y Poppins en formato .woff2
-├── video/             — videos puntuales usados por cards del caso de estudio
-├── videos/
-│   └── caso/
-│       └── README.txt — nombres esperados para placeholders / clips del caso
-└── CHANGELOG.md
+|-- index.html         - estructura principal de la pagina
+|-- styles.css         - estilos globales, responsive, temas y estados
+|-- main.js            - interacciones, modales, tema y comportamiento mobile
+|-- img/
+|   |-- logo_reina.svg - logo usado en nav y footer
+|   |-- favicon.svg    - favicon principal
+|   |-- favicon.png    - fallback PNG
+|   `-- combo.jpg      - portada real usada en el caso de estudio
+|-- fonts/             - Playfair Display y Poppins en `.woff2`
+|-- video/             - assets puntuales de video
+|-- videos/
+|   `-- caso/
+|       `-- README.txt - nombres esperados para placeholders y clips del caso
+|-- README.md
+`-- CHANGELOG.md
 ```
-
-Abrí `index.html` directamente en tu navegador. No necesita servidor local.
 
 ---
 
-## Personalización rápida
+## Personalizacion rapida
 
-### Cambiar imágenes
-Reemplazá el `src` de las etiquetas `<img>` en `index.html`:
-- **Hero** → buscar `class="hero-portrait-img"`
-- **Sobre mí** → buscar `data-testid="about-portrait"`
+### Cambiar imagenes
+
+Reemplaza el `src` de las etiquetas `<img>` en `index.html`.
+
+- Hero: buscar `class="hero-portrait-img"`
+- Sobre mi: buscar `data-testid="about-portrait"`
 
 ### Cambiar mensajes de WhatsApp
-Cada botón tiene un atributo `data-wa-msg` con el texto que se envía. Editalo directamente en el HTML.
 
-### Ampliar la información de Servicios
-Cada card de servicio expone su contenido del popup mediante atributos `data-service-*` en `index.html`.
-Podés editar ahí:
-- título y subtítulo
-- descripción ampliada
+Cada boton usa `data-wa-msg` con el texto a enviar. Se edita directamente en `index.html`.
+
+### Editar contenido de los modales de servicios
+
+Cada card de servicio expone su contenido mediante atributos `data-service-*` en `index.html`.
+
+Desde ahi podes cambiar:
+
+- titulo y subtitulo
+- hook principal
+- descripcion ampliada
 - entregables
 - enfoque de trabajo
 - tags
 - variante visual / mockup
+- mensaje contextual de WhatsApp
 
-### Agregar imágenes al modal de portfolio
-Cada item del portfolio tiene un atributo `data-media` con un array JSON:
+### Ajustar visuales de los servicios
+
+Los mini visuales del modal de servicios se construyen en `index.html` dentro de `#smodalPreview` y se estilizan en `styles.css` con prefijos `.svisual-*` y `.smodal-*`.
+
+### Agregar imagenes o videos al portfolio
+
+Cada item del portfolio usa `data-media` con un array JSON:
+
 ```json
 [
-  { "type": "image", "src": "img/proyecto.jpg", "alt": "descripción" },
+  { "type": "image", "src": "img/proyecto.jpg", "alt": "descripcion" },
   { "type": "video", "src": "video/proyecto.mp4", "poster": "img/thumbnail.jpg" }
 ]
 ```
 
 ### Actualizar videos del caso de estudio
-Cada card comparativa usa atributos `data-video-src` y, opcionalmente, `data-video-poster`.
+
+Cada card comparativa usa `data-video-src` y, opcionalmente, `data-video-poster`.
 
 Ejemplo:
+
 ```html
 <div
   class="cv-card cv-card--after"
@@ -104,14 +131,16 @@ Ejemplo:
 </div>
 ```
 
-Si no definís `data-video-poster`, `main.js` genera una portada editorial automáticamente.
-El video se abre en un modal centrado con controles nativos y volumen inicial configurado al 35%.
+Si no se define `data-video-poster`, `main.js` genera una portada editorial automatica.
 
 ### Actualizar precios
-Los precios están directamente en el HTML dentro de `<span class="pricing-price">`. Buscá las secciones `#planes-contenido` y `#tienda-online`.
+
+Los importes se editan en `index.html` dentro de `<span class="pricing-price">` en las secciones `#planes-contenido` y `#tienda-online`.
 
 ### Cambiar colores
-Las variables de color están en `styles.css`:
+
+Las variables principales viven en `styles.css`:
+
 ```css
 --reina-ivory:        #fffeec
 --reina-dark:         #1a1a2e
@@ -124,10 +153,12 @@ Las variables de color están en `styles.css`:
 ```
 
 ### Cambiar el tema por defecto
-El tema inicial se detecta desde la preferencia del sistema (`prefers-color-scheme`). Para forzar uno:
+
+El sitio arranca en modo claro cuando no hay preferencia guardada. Si queres modificarlo, revisa el script inline del `<head>` en `index.html`.
+
 ```js
-// En el script del <head> en index.html
-var theme = storedTheme || 'light'; // 'light' o 'dark'
+var storedTheme = localStorage.getItem('reina-theme');
+var theme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : 'light';
 ```
 
 ---
@@ -135,5 +166,5 @@ var theme = storedTheme || 'light'; // 'light' o 'dark'
 ## Contacto
 
 - WhatsApp: [+54 9 341 783 6449](https://wa.me/5493417836449)
-- Email: hola@angireina.com
+- Email: `hola@angireina.com`
 - Instagram: [@reinabyangi](https://instagram.com/reinabyangi)

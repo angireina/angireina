@@ -5,6 +5,31 @@ El formato está basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.
 
 ---
 
+## [1.12.0] — 2026-04-19
+
+### Añadido
+- Botón flotante de **volver arriba** visible en mobile cuando el usuario supera cierto scroll
+- Integración con `History API` para que el gesto o botón de **back** en mobile cierre primero los modales abiertos de servicios, portfolio y video
+
+### Cambiado
+- El sitio ahora arranca en **modo claro por defecto** cuando no existe una preferencia previa en `localStorage`
+- El navbar dejó de comportarse como sticky en mobile y conserva el estado `scrolled` solo en desktop
+- Las cards centrales destacadas de **Planes de Contenido** y **Tienda Online** pasan a usar `--reina-violet-dark` en ambos temas
+- La sección de **CTA final** usa `--reina-violet` en modo claro y `--reina-violet-dark` en modo oscuro
+- Los precios de las cards de **Planes de Contenido** y **Tienda Online** pasan a usar `Poppins`
+- Los botones de cierre de modales fueron recalibrados en desktop, tablet y mobile para mantener visibilidad sin invadir el contenido
+- Los visuales del modal de **Servicios** ganaron más contraste interno, separación de capas y mejores microtextos
+
+### Corregido
+- Hover desactivado en tablet/mobile para cards de servicios, pricing, portfolio y cards del caso; los botones touch ahora usan estados `:active`
+- Legibilidad de las cards de servicios mejorada con más contraste, mejor espaciado y tags más claros
+- Modales de servicios y portfolio ajustados en mobile para evitar contenido atrapado, scroll incómodo y zonas ilegibles
+- El modal de portfolio ya no superpone el botón de cierre sobre el bloque superior de texto
+- La posición de scroll de los modales se resetea al abrir para evitar reentradas a mitad de contenido
+- Las seis cards de servicios ahora muestran de forma consistente la línea violeta inferior
+
+---
+
 ## [1.11.0] — 2026-04-19
 
 ### Añadido
