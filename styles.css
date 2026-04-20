@@ -776,7 +776,7 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .nav-links {
         display: flex;
     }
