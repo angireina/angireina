@@ -144,6 +144,12 @@ button {
     letter-spacing: -0.02em;
 }
 
+.font-display em,
+.faq-heading em {
+    font-style: italic;
+    font-weight: 400;
+}
+
 .font-body {
     font-family: "Poppins", sans-serif;
 }
@@ -1384,6 +1390,7 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
 #planes-contenido .pricing-price,
 #tienda-online .pricing-price {
     font-family: "Poppins", sans-serif;
+    font-weight: 500;
 }
 
 .pricing-period {
@@ -2436,6 +2443,199 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
 
     .about-image-wrapper {
         order: 2;
+    }
+}
+
+/* =============================================
+   FAQ
+   ============================================= */
+.faq-section {
+    background: var(--reina-ivory);
+    color: var(--reina-dark);
+    padding: 6rem 0 7rem;
+}
+
+.faq-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.faq-eyebrow {
+    margin-bottom: 1.5rem;
+}
+
+.faq-heading {
+    font-family: "Playfair Display", Georgia, serif;
+    letter-spacing: 0;
+    font-size: 2.75rem;
+    line-height: 1.02;
+    font-weight: 400;
+}
+
+.faq-heading em {
+    font-style: italic;
+}
+
+.faq-intro {
+    max-width: 24rem;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(26, 26, 46, 0.72);
+}
+
+.faq-list {
+    border-top: 1px solid rgba(26, 26, 46, 0.12);
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(26, 26, 46, 0.12);
+}
+
+.faq-question {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr) 2.75rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.65rem 0;
+    color: inherit;
+    text-align: left;
+}
+
+.faq-number {
+    align-self: start;
+    padding-top: 0.55rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    color: var(--reina-violet);
+}
+
+.faq-title {
+    font-family: "Playfair Display", Georgia, serif;
+    letter-spacing: 0;
+    font-size: 1.55rem;
+    line-height: 1.18;
+    font-weight: 400;
+}
+
+.faq-toggle-icon {
+    position: relative;
+    justify-self: end;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgba(26, 26, 46, 0.14);
+    border-radius: 9999px;
+    color: var(--reina-dark);
+    transition:
+        background 250ms ease,
+        border-color 250ms ease,
+        color 250ms ease,
+        transform 250ms ease;
+}
+
+.faq-toggle-icon::before,
+.faq-toggle-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.7rem;
+    height: 1px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+}
+
+.faq-toggle-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+        grid-template-rows 300ms ease,
+        opacity 250ms ease;
+}
+
+.faq-answer-inner {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr) 2.75rem;
+    gap: 1rem;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.faq-answer p {
+    grid-column: 2;
+    max-width: 46rem;
+    padding: 0 0 1.85rem;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(26, 26, 46, 0.72);
+}
+
+.faq-item.is-open .faq-toggle-icon {
+    background: var(--reina-violet);
+    border-color: var(--reina-violet);
+    color: var(--reina-ivory);
+    transform: rotate(45deg);
+}
+
+.faq-item.is-open .faq-answer {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.faq-question:focus-visible .faq-toggle-icon {
+    outline: 2px solid var(--reina-violet);
+    outline-offset: 4px;
+}
+
+@media (min-width: 768px) {
+    .faq-section {
+        padding: 8rem 0 9rem;
+    }
+
+    .faq-header {
+        grid-template-columns: minmax(0, 7fr) minmax(18rem, 4fr);
+        align-items: end;
+        gap: 4rem;
+        margin-bottom: 4.5rem;
+    }
+
+    .faq-heading {
+        font-size: 4.5rem;
+    }
+
+    .faq-intro {
+        margin-bottom: 0.55rem;
+    }
+
+    .faq-question,
+    .faq-answer-inner {
+        grid-template-columns: 3.5rem minmax(0, 1fr) 3rem;
+        gap: 1.5rem;
+    }
+
+    .faq-question {
+        padding: 2rem 0;
+    }
+
+    .faq-title {
+        font-size: 2rem;
+    }
+
+    .faq-toggle-icon {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .faq-answer p {
+        padding-bottom: 2.25rem;
+        font-size: 1rem;
     }
 }
 
@@ -3610,7 +3810,8 @@ html[data-theme="dark"] .hero-section,
 html[data-theme="dark"] .services-section,
 html[data-theme="dark"] .pricing-section,
 html[data-theme="dark"] .casestudy-section,
-html[data-theme="dark"] .about-section {
+html[data-theme="dark"] .about-section,
+html[data-theme="dark"] .faq-section {
     background: var(--theme-bg);
     color: var(--theme-text);
 }
@@ -3718,6 +3919,8 @@ html[data-theme="dark"] .cs-context-heading,
 html[data-theme="dark"] .cs-quote-text,
 html[data-theme="dark"] .about-heading,
 html[data-theme="dark"] .about-tagline,
+html[data-theme="dark"] .faq-heading,
+html[data-theme="dark"] .faq-title,
 html[data-theme="dark"] .year-card-text,
 html[data-theme="dark"] .pmodal-name,
 html[data-theme="dark"] .smodal-name {
@@ -3747,6 +3950,9 @@ html[data-theme="dark"] .cs-context-body,
 html[data-theme="dark"] .cs-transform-list li,
 html[data-theme="dark"] .about-eyebrow,
 html[data-theme="dark"] .about-bio,
+html[data-theme="dark"] .faq-eyebrow,
+html[data-theme="dark"] .faq-intro,
+html[data-theme="dark"] .faq-answer p,
 html[data-theme="dark"] .meta-text,
 html[data-theme="dark"] .pmodal-desc,
 html[data-theme="dark"] .pmodal-tags li,
@@ -3825,6 +4031,26 @@ html[data-theme="dark"] .casestudy-context,
 html[data-theme="dark"] .cs-quote-block,
 html[data-theme="dark"] .pmodal-tags {
     border-top-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .faq-list,
+html[data-theme="dark"] .faq-item {
+    border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .faq-number {
+    color: var(--reina-violet);
+}
+
+html[data-theme="dark"] .faq-toggle-icon {
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .faq-item.is-open .faq-toggle-icon {
+    background: var(--reina-violet);
+    border-color: var(--reina-violet);
+    color: var(--reina-ivory);
 }
 
 html[data-theme="dark"] .cs-quote-cta {

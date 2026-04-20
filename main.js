@@ -157,6 +157,38 @@
 })();
 
 /* =============================================
+   FAQ ACCORDION
+   ============================================= */
+(function() {
+    const items = Array.from(document.querySelectorAll('.faq-item'));
+
+    if (!items.length) return;
+
+    function setItemState(item, isOpen) {
+        const button = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+
+        item.classList.toggle('is-open', isOpen);
+        button?.setAttribute('aria-expanded', String(isOpen));
+        answer?.setAttribute('aria-hidden', String(!isOpen));
+    }
+
+    items.forEach((item) => {
+        const button = item.querySelector('.faq-question');
+
+        if (!button) return;
+
+        button.addEventListener('click', () => {
+            const shouldOpen = button.getAttribute('aria-expanded') !== 'true';
+
+            items.forEach((otherItem) => {
+                setItemState(otherItem, otherItem === item ? shouldOpen : false);
+            });
+        });
+    });
+})();
+
+/* =============================================
    MOBILE MODAL HISTORY
    ============================================= */
 const mobileModalHistory = (() => {
