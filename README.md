@@ -12,7 +12,7 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 
 | Seccion | Descripcion |
 |---|---|
-| **Nav** | Navegacion principal con menu hamburguesa en mobile, toggle de tema y estado sticky solo en desktop |
+| **Nav** | Navegacion principal con links a servicios, planes, paginas, caso, portfolio, sobre mi y FAQ; incluye menu hamburguesa en mobile, toggle de tema y estado sticky solo en desktop |
 | **Hero** | Presentacion principal con titular, descripcion, estadisticas y CTAs |
 | **El problema real** | Seccion editorial con citas que conectan con dolores concretos del cliente ideal |
 | **Servicios** | Seis cards de servicio con modal contextual, entregables, CTA, visual propio por servicio y contenido editable debajo de cada card |
@@ -37,6 +37,20 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 - Los modales de servicios, portfolio y video integran historial del navegador en mobile: el gesto o boton de **back** cierra primero el popup abierto.
 - Los modales de servicios y portfolio fueron ajustados para mejorar legibilidad, scroll y espacio util en mobile.
 - La seccion de **FAQ** funciona como acordeon accesible: solo una respuesta queda abierta a la vez, con `aria-expanded` y `aria-hidden` sincronizados.
+- Los CTAs principales a WhatsApp tienen `href` directo con mensaje prearmado y mantienen `data-wa-msg` para que JavaScript pueda regenerar el enlace contextual.
+
+---
+
+## SEO / SEM y performance
+
+El proyecto incluye configuracion base para indexacion, previews sociales y conversion:
+
+- **SEO basico en `<head>`**: `title`, `description`, `keywords`, `author`, `robots`, `theme-color` y `canonical` apuntando a `https://angireina.com/`.
+- **Open Graph y Twitter Cards**: tags para Facebook, WhatsApp, LinkedIn y X, usando `img/og-cover.jpg` como imagen social principal.
+- **Schema.org**: datos estructurados `ProfessionalService` para la marca/servicios y `FAQPage` para las preguntas frecuentes.
+- **Crawling**: `robots.txt` permite el rastreo y referencia `sitemap.xml`; el sitemap declara la home canonica con `lastmod`, `changefreq` y `priority`.
+- **Performance SEO**: preconnect a hosts de imagenes, preload de la imagen hero con `fetchpriority="high"`, `width`/`height` en imagenes clave y `loading="lazy"` en media no critica.
+- **SEM / conversion**: los enlaces de WhatsApp tienen mensajes codificados en el `href` como fallback sin JS, utiles para trafico de anuncios, previews y navegadores con scripts limitados.
 
 ---
 
@@ -64,12 +78,16 @@ landing-vanilla/
 |   |-- logo_reina.svg - logo usado en nav y footer
 |   |-- favicon.svg    - favicon principal
 |   |-- favicon.png    - fallback PNG
+|   |-- apple-touch-icon.png - icono 180x180 para iOS y accesos guardados
+|   |-- og-cover.jpg   - imagen 1200x630 para Open Graph y Twitter Cards
 |   `-- combo.jpg      - portada real usada en el caso de estudio
 |-- fonts/             - Playfair Display y Poppins en `.woff2`
 |-- video/             - assets puntuales de video
 |-- videos/
 |   `-- caso/
 |       `-- README.txt - nombres esperados para placeholders y clips del caso
+|-- robots.txt         - reglas de rastreo y referencia al sitemap
+|-- sitemap.xml        - sitemap publico de la landing
 |-- README.md
 `-- CHANGELOG.md
 ```
@@ -87,7 +105,12 @@ Reemplaza el `src` de las etiquetas `<img>` en `index.html`.
 
 ### Cambiar mensajes de WhatsApp
 
-Cada boton usa `data-wa-msg` con el texto a enviar. Se edita directamente en `index.html`.
+Cada boton usa `data-wa-msg` con el texto a enviar y tambien un `href` directo a `https://wa.me/...` con el mensaje codificado.
+
+Cuando cambies un CTA, actualiza ambos valores:
+
+- `data-wa-msg` para el comportamiento JavaScript
+- `href` para fallback sin JavaScript, previews, crawlers y trafico de campanas
 
 ### Editar contenido de los modales de servicios
 
@@ -160,6 +183,34 @@ La seccion vive en `index.html` dentro de `#faq`. Cada pregunta usa un bloque `.
 - IDs emparejados entre `aria-controls` y `aria-labelledby`
 
 Si agregas o quitas preguntas, manten la numeracion visual (`.faq-number`) y los IDs de trigger/panel unicos para conservar la accesibilidad del acordeon.
+
+Si modificas el contenido de la FAQ visible, replica el cambio en el JSON-LD `FAQPage` dentro del `<head>` para que los datos estructurados sigan coincidiendo con la pagina.
+
+### Actualizar SEO, redes y buscadores
+
+Los metadatos principales viven en el `<head>` de `index.html`.
+
+Revisa estos bloques cuando cambie el dominio, la propuesta comercial o la imagen social:
+
+- `SEO BASICO`: titulo, descripcion, keywords, robots, theme-color y canonical
+- `OPEN GRAPH`: `og:title`, `og:description`, `og:url`, `og:image`, dimensiones y alt
+- `TWITTER / X`: card, titulo, descripcion e imagen
+- `SCHEMA.ORG: ProfessionalService`: datos de marca, contacto, ubicacion y catalogo de servicios
+- `SCHEMA.ORG: FAQPage`: preguntas y respuestas visibles en `#faq`
+
+Si cambia la URL final del sitio, actualiza tambien `robots.txt`, `sitemap.xml`, `og:url`, `og:image`, `canonical` y las URLs absolutas del JSON-LD.
+
+### Cambiar imagen social
+
+La imagen de preview social esta en `img/og-cover.jpg` y se referencia desde Open Graph, Twitter Cards y Schema.org. Mantenla en proporcion **1200x630** para evitar recortes raros en WhatsApp, LinkedIn, Facebook y X.
+
+### Actualizar sitemap
+
+El sitemap vive en `sitemap.xml`. Si se publica una nueva version relevante, actualiza:
+
+- `<lastmod>` con fecha ISO (`YYYY-MM-DD`)
+- `<loc>` si cambia el dominio canonico
+- `robots.txt` si cambia la ubicacion del sitemap
 
 ### Cambiar colores
 

@@ -5,6 +5,30 @@ El formato esta basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0
 
 ---
 
+## [1.14.0] - 2026-04-20
+
+### Anadido
+- Metadatos SEO basicos en el `<head>`: `title`, `description`, `keywords`, `author`, `robots`, `theme-color` y `canonical`
+- Tags **Open Graph** y **Twitter Cards** para previews en WhatsApp, Facebook, LinkedIn y X
+- Imagen social `img/og-cover.jpg` para usar como preview 1200x630 en redes y mensajeria
+- Icono `img/apple-touch-icon.png` 180x180 para iOS y accesos guardados desde dispositivos Apple
+- Datos estructurados **Schema.org** con `ProfessionalService` y `FAQPage`
+- Archivos `robots.txt` y `sitemap.xml` para rastreo e indexacion del dominio canonico
+- Hints de performance SEO: `preconnect`, `preload` de imagen hero, `fetchpriority`, dimensiones en imagenes clave y lazy loading en media no critica
+
+### Cambiado
+- La navegacion desktop y mobile ahora incluye accesos directos a **Planes**, **Paginas** y **FAQ**
+- El breakpoint de navegacion desktop pasa a `1024px` para sostener mejor la nueva cantidad de links
+- Los CTAs de WhatsApp ahora usan `href` directo con mensaje codificado, manteniendo `data-wa-msg` como fuente para el comportamiento JavaScript
+- Las imagenes principales y de portfolio incorporan alt text mas descriptivo, `width`/`height` y carga diferida cuando corresponde
+- Los items de portfolio pasan a actuar como disparadores de modal sin depender de enlaces vacios `#`
+
+### Corregido
+- Los principales puntos de conversion ya no dependen exclusivamente de JavaScript para abrir WhatsApp con el mensaje correcto
+- Se removio el placeholder de video del primer item de portfolio para evitar una media inexistente en el modal
+
+---
+
 ## [1.13.0] - 2026-04-19
 
 ### Anadido
