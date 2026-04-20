@@ -5,6 +5,18 @@ El formato esta basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0
 
 ---
 
+## [1.13.0] - 2026-04-19
+
+### Anadido
+- Seccion **FAQ** entre **Sobre mi** y **Contacto**, con cinco preguntas frecuentes sobre tiempos, requisitos iniciales, revisiones, pagos y acompanamiento
+- Acordeon accesible para FAQ en `main.js`, con apertura exclusiva por item y sincronizacion de `aria-expanded` / `aria-hidden`
+- Estilos responsive para FAQ en `styles.css`, incluyendo soporte visual para modo claro y modo oscuro
+
+### Cambiado
+- La experiencia de cierre ahora incorpora una instancia previa de resolucion de dudas antes del CTA final de contacto
+
+---
+
 ## [1.12.1] - 2026-04-19
 
 ### Cambiado

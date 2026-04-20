@@ -1,12 +1,12 @@
 # REINA - Angi Reina
 
-Landing page personal de **Angi Reina**, disenadora grafica y community manager radicada en Rosario, Argentina. El sitio presenta su propuesta de valor, servicios, planes, caso de estudio, portfolio y canales de contacto.
+Landing page personal de **Angi Reina**, disenadora grafica y community manager radicada en Rosario, Argentina. El sitio presenta su propuesta de valor, servicios, planes, caso de estudio, portfolio, preguntas frecuentes y canales de contacto.
 
 ---
 
 ## Que hace este sitio
 
-La pagina funciona como herramienta de presentacion y captacion para la marca personal de Angi. La experiencia esta pensada para llevar al visitante desde la propuesta de valor hasta el contacto directo por WhatsApp o email, con una narrativa visual consistente y una UX cuidada en desktop, tablet y mobile.
+La pagina funciona como herramienta de presentacion y captacion para la marca personal de Angi. La experiencia esta pensada para llevar al visitante desde la propuesta de valor hasta la resolucion de dudas frecuentes y el contacto directo por WhatsApp o email, con una narrativa visual consistente y una UX cuidada en desktop, tablet y mobile.
 
 ### Secciones
 
@@ -21,6 +21,7 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 | **Caso de estudio** | Caso real con comparativa antes/despues, narrativa, resultados y cards de video |
 | **Portfolio** | Grilla asimetrica con modal por proyecto y media ampliada |
 | **Sobre mi** | Bio, filosofia de trabajo y disponibilidad |
+| **FAQ** | Acordeon de cinco preguntas frecuentes sobre tiempos, inicio del proceso, revisiones, pagos y acompanamiento |
 | **Contacto (CTA)** | Bloque final de cierre con acceso directo a WhatsApp y email |
 | **Footer** | Navegacion secundaria, marca y datos de contacto |
 
@@ -35,6 +36,7 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 - En dispositivos touch, los hover de cards se limitan a desktop y los botones responden con estados `:active`.
 - Los modales de servicios, portfolio y video integran historial del navegador en mobile: el gesto o boton de **back** cierra primero el popup abierto.
 - Los modales de servicios y portfolio fueron ajustados para mejorar legibilidad, scroll y espacio util en mobile.
+- La seccion de **FAQ** funciona como acordeon accesible: solo una respuesta queda abierta a la vez, con `aria-expanded` y `aria-hidden` sincronizados.
 
 ---
 
@@ -44,7 +46,7 @@ El sitio esta construido integramente con tecnologias web nativas, sin framework
 
 - **HTML5** para estructura semantica
 - **CSS3** para layout responsive, variables, animaciones, estados y theming
-- **JavaScript vanilla** para scroll reveal, menu mobile, modales, WhatsApp contextual, tema claro/oscuro, boton mobile de volver arriba e integracion con History API en modales mobile
+- **JavaScript vanilla** para scroll reveal, menu mobile, modales, FAQ acordeon, WhatsApp contextual, tema claro/oscuro, boton mobile de volver arriba e integracion con History API en modales mobile
 - **Fuentes auto-hospedadas**: Playfair Display y Poppins servidas como `.woff2` desde `fonts/`
 
 No requiere build. Se puede abrir `index.html` directamente en el navegador.
@@ -148,6 +150,16 @@ Si no se define `data-video-poster`, `main.js` genera una portada editorial auto
 ### Actualizar precios
 
 Los importes se editan en `index.html` dentro de `<span class="pricing-price">` en las secciones `#planes-contenido` y `#tienda-online`.
+
+### Editar preguntas frecuentes
+
+La seccion vive en `index.html` dentro de `#faq`. Cada pregunta usa un bloque `.faq-item` con:
+
+- Un boton `.faq-question` con `aria-expanded`
+- Un panel `.faq-answer` con `aria-hidden`
+- IDs emparejados entre `aria-controls` y `aria-labelledby`
+
+Si agregas o quitas preguntas, manten la numeracion visual (`.faq-number`) y los IDs de trigger/panel unicos para conservar la accesibilidad del acordeon.
 
 ### Cambiar colores
 
