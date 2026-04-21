@@ -5,6 +5,36 @@ El formato esta basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0
 
 ---
 
+## [1.16.0] - 2026-04-21
+
+### Anadido
+- Posters locales `img/antes-herradura.jpg` y `img/despues-herradura.jpg` para las cards del caso **Esquinero Herradura**
+- Soporte en el modal del caso para reproducir enlaces externos de **TikTok** mediante iframe embebido
+- Soporte en el modal del caso para URLs de **YouTube**, Shorts, `youtu.be` y `youtube-nocookie.com`
+- Fallback para videos nativos con `<video>` cuando `data-video-src` apunta a un archivo reproducible
+- Nuevos bloques visuales `.social-*` para presentar **Gestion de Redes** como servicio a medida
+- Nuevos bloques visuales `.shop-*` para presentar **Tienda Online** como servicio a medida
+
+### Cambiado
+- La navegacion renombra **Planes** a **Redes** y **Paginas** a **Tienda** en desktop y mobile
+- La seccion `#planes-contenido` deja de mostrar tres planes con precios fijos y pasa a una propuesta editorial de gestion de redes con dashboard, calendario, entregables y CTA contextual
+- La seccion `#tienda-online` deja de mostrar tres planes con precios fijos y pasa a una propuesta de tienda lista para vender, con mockup de browser, checkout, checklist y presupuesto a medida
+- El caso **Muebleria Bravo** ahora compara videos reales de TikTok para el producto **Esquinero Herradura**, usando metricas tomadas de TikTok y alcance multiplataforma
+- Las metricas del caso ahora incluyen compartidos ademas de vistas, likes y guardados
+- El modal de video del caso reemplaza el `<video>` fijo por un contenedor dinamico que inserta iframe o video nativo segun el origen
+- El modal de video del caso se centra mejor en mobile y respeta `safe-area` con limites de alto para pantallas chicas
+- Los estilos del caso se ajustaron para textos menos condensados, metricas en grilla y badges con lectura mas natural
+
+### Eliminado
+- Se removio `video/combo.mp4`; el caso ya no depende de un video local pesado
+- Se removio `videos/caso/README.txt`; ya no se usan placeholders locales para clips del caso
+
+### Corregido
+- El reproductor del caso limpia iframes/videos al cerrar el modal, evitando que el audio o la reproduccion queden activos
+- El modal pausa videos nativos cuando la pestana queda oculta
+
+---
+
 ## [1.15.0] - 2026-04-20
 
 ### Anadido

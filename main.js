@@ -97,6 +97,53 @@
 })();
 
 /* =============================================
+   ANCHOR NAVIGATION
+   ============================================= */
+(function() {
+    const nav = document.getElementById('nav');
+    const desktopViewport = window.matchMedia('(min-width: 768px)');
+    const links = document.querySelectorAll('a[href^="#"]');
+
+    if (!links.length) return;
+
+    function getScrollOffset() {
+        if (!desktopViewport.matches || !nav) {
+            return 0;
+        }
+
+        return nav.getBoundingClientRect().height;
+    }
+
+    function scrollToTarget(target) {
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+        const nextTop = Math.max(0, targetTop - getScrollOffset());
+
+        window.scrollTo({
+            top: nextTop,
+            behavior: 'smooth'
+        });
+    }
+
+    links.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const hash = link.getAttribute('href');
+            if (!hash || hash === '#') return;
+
+            const targetId = decodeURIComponent(hash.slice(1));
+            const target = document.getElementById(targetId);
+            if (!target) return;
+
+            event.preventDefault();
+            scrollToTarget(target);
+
+            if (window.history && typeof window.history.pushState === 'function') {
+                window.history.pushState(null, '', hash);
+            }
+        });
+    });
+})();
+
+/* =============================================
    MOBILE MENU
    ============================================= */
 (function() {
@@ -433,13 +480,13 @@ const mobileModalHistory = (() => {
 (function() {
     const overlay = document.getElementById('caseVideoModal');
     const closeBtn = document.getElementById('cvmodalClose');
-    const videoEl = document.getElementById('cvmodalVideo');
+    const playerEl = document.getElementById('cvmodalVideo');
     const kickerEl = document.getElementById('cvmodalKicker');
     const titleEl = document.getElementById('cvmodalTitle');
     const cards = document.querySelectorAll('.cv-card[data-video-src]');
     let lastTrigger = null;
 
-    if (!overlay || !closeBtn || !videoEl || !kickerEl || !titleEl || !cards.length) return;
+    if (!overlay || !closeBtn || !playerEl || !kickerEl || !titleEl || !cards.length) return;
 
     mobileModalHistory.register('caseVideoModal', {
         isOpen: () => overlay.classList.contains('is-open'),
@@ -526,30 +573,171 @@ const mobileModalHistory = (() => {
             'Video';
     }
 
+    function getYoutubeId(src) {
+        if (!src) return '';
+
+        try {
+            const url = new URL(src, window.location.href);
+            const host = url.hostname.replace(/^www\./, '');
+            const pathParts = url.pathname.split('/').filter(Boolean);
+
+            if (host === 'youtu.be') {
+                return pathParts[0] || '';
+            }
+
+            if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
+                if (pathParts[0] === 'shorts' || pathParts[0] === 'embed') {
+                    return pathParts[1] || '';
+                }
+
+                return url.searchParams.get('v') || '';
+            }
+        } catch (error) {
+            return '';
+        }
+
+        return '';
+    }
+
+    function buildYoutubeEmbedUrl(src) {
+        const id = getYoutubeId(src);
+        if (!id) return '';
+
+        const params = new URLSearchParams({
+            autoplay: '1',
+            rel: '0',
+            modestbranding: '1',
+            playsinline: '1'
+        });
+
+        return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?${params.toString()}`;
+    }
+
+    function getTikTokId(src) {
+        if (!src) return '';
+
+        try {
+            const url = new URL(src, window.location.href);
+            const host = url.hostname.replace(/^www\./, '');
+            const pathParts = url.pathname.split('/').filter(Boolean);
+
+            if (host !== 'tiktok.com' && host !== 'm.tiktok.com') {
+                return '';
+            }
+
+            if (pathParts[0] === 'player' && pathParts[1] === 'v1') {
+                return pathParts[2] || '';
+            }
+
+            const videoIndex = pathParts.indexOf('video');
+            if (videoIndex !== -1) {
+                return pathParts[videoIndex + 1] || '';
+            }
+        } catch (error) {
+            return '';
+        }
+
+        return '';
+    }
+
+    function buildTikTokEmbedUrl(src) {
+        const id = getTikTokId(src);
+        if (!id) return '';
+
+        const params = new URLSearchParams({
+            autoplay: '1',
+            controls: '1',
+            description: '0',
+            music_info: '0',
+            rel: '0',
+            native_context_menu: '0'
+        });
+
+        return `https://www.tiktok.com/player/v1/${encodeURIComponent(id)}?${params.toString()}`;
+    }
+
     function getPoster(card) {
-        return card.dataset.videoPoster || buildPoster(card);
+        const youtubeId = getYoutubeId(card.dataset.videoSrc);
+        return card.dataset.videoPoster ||
+            (youtubeId ? `https://i.ytimg.com/vi/${encodeURIComponent(youtubeId)}/hqdefault.jpg` : buildPoster(card));
+    }
+
+    function resetPlayer() {
+        const video = playerEl.querySelector('video');
+        if (video) {
+            video.pause();
+            video.removeAttribute('src');
+            video.load();
+        }
+
+        playerEl.replaceChildren();
+    }
+
+    function createPlayer(card) {
+        const src = card.dataset.videoSrc;
+        const youtubeEmbedUrl = buildYoutubeEmbedUrl(src);
+        const tiktokEmbedUrl = buildTikTokEmbedUrl(src);
+
+        if (youtubeEmbedUrl) {
+            const iframe = document.createElement('iframe');
+            iframe.src = youtubeEmbedUrl;
+            iframe.title = getTitle(card);
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+
+            return {
+                element: iframe,
+                isNativeVideo: false
+            };
+        }
+
+        if (tiktokEmbedUrl) {
+            const iframe = document.createElement('iframe');
+            iframe.src = tiktokEmbedUrl;
+            iframe.title = getTitle(card);
+            iframe.allow = 'autoplay; fullscreen';
+            iframe.allowFullscreen = true;
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+
+            return {
+                element: iframe,
+                isNativeVideo: false
+            };
+        }
+
+        if (!src) return null;
+
+        const video = document.createElement('video');
+        video.src = src;
+        video.poster = getPoster(card);
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.muted = false;
+        video.volume = 0.35;
+
+        return {
+            element: video,
+            isNativeVideo: true
+        };
     }
 
     function openModal(card, trigger) {
         const src = card.dataset.videoSrc;
         if (!src) return;
+        const player = createPlayer(card);
+        if (!player) return;
 
-        const side = card.classList.contains('cv-card--after') ? 'Despues' : 'Antes';
+        const side = card.classList.contains('cv-card--after') ? 'Despu\u00e9s' : 'Antes';
         const detail = card.closest('.cv-side')?.querySelector('.cv-side-desc')?.textContent.trim() || '';
 
         lastTrigger = trigger;
         kickerEl.textContent = detail ? `${side} · ${detail}` : side;
         titleEl.textContent = getTitle(card);
 
-        videoEl.pause();
-        videoEl.removeAttribute('src');
-        videoEl.load();
-        videoEl.poster = getPoster(card);
-        videoEl.src = src;
-        videoEl.currentTime = 0;
-        videoEl.controls = true;
-        videoEl.muted = false;
-        videoEl.volume = 0.35;
+        resetPlayer();
+        playerEl.replaceChildren(player.element);
 
         overlay.classList.add('is-open');
         overlay.setAttribute('aria-hidden', 'false');
@@ -557,7 +745,7 @@ const mobileModalHistory = (() => {
         mobileModalHistory.open('caseVideoModal');
         requestAnimationFrame(() => closeBtn.focus());
 
-        const playPromise = videoEl.play();
+        const playPromise = player.isNativeVideo ? player.element.play() : null;
         if (playPromise && typeof playPromise.catch === 'function') {
             playPromise.catch(() => {});
         }
@@ -566,9 +754,7 @@ const mobileModalHistory = (() => {
     function closeModal() {
         if (!overlay.classList.contains('is-open')) return;
 
-        videoEl.pause();
-        videoEl.removeAttribute('src');
-        videoEl.load();
+        resetPlayer();
         overlay.classList.remove('is-open');
         overlay.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('modal-open');
@@ -627,7 +813,10 @@ const mobileModalHistory = (() => {
 
     document.addEventListener('visibilitychange', () => {
         if (document.hidden && overlay.classList.contains('is-open')) {
-            videoEl.pause();
+            const video = playerEl.querySelector('video');
+            if (video) {
+                video.pause();
+            }
         }
     });
 })();

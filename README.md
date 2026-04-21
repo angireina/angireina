@@ -12,13 +12,13 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 
 | Seccion | Descripcion |
 |---|---|
-| **Nav** | Navegacion principal con links a servicios, planes, paginas, caso, portfolio, sobre mi y FAQ; incluye menu hamburguesa en mobile, toggle de tema y estado sticky solo en desktop |
+| **Nav** | Navegacion principal con links a servicios, redes, tienda, caso, portfolio, sobre mi y FAQ; incluye menu hamburguesa en mobile, toggle de tema y estado sticky solo en desktop |
 | **Hero** | Presentacion principal con titular, descripcion, estadisticas y CTAs |
 | **El problema real** | Seccion editorial con citas que conectan con dolores concretos del cliente ideal |
 | **Servicios** | Seis cards de servicio con modal contextual, entregables, CTA, visual propio por servicio y contenido editable debajo de cada card |
-| **Planes - Contenido** | Tres planes mensuales para gestion de redes |
-| **Tienda Online - Planes** | Tres planes para armado de tienda en Tiendanube o Shopify |
-| **Caso de estudio** | Caso real con comparativa antes/despues para TikTok, metricas organicas, banda de resultado 60x y cards de video |
+| **Gestion de Redes** | Servicio a medida para redes sociales con estrategia, calendario, piezas, historias, optimizacion e informe mensual |
+| **Tienda Online** | Servicio a medida para tienda en Tiendanube con diseno, productos, pagos, envios, dominio, correo y SEO basico |
+| **Caso de estudio** | Caso real con comparativa antes/despues para TikTok, metricas organicas, banda de resultado 60x y cards con embed externo |
 | **Portfolio** | Grilla asimetrica con modal por proyecto y media ampliada |
 | **Sobre mi** | Bio, filosofia de trabajo y disponibilidad |
 | **FAQ** | Acordeon de cinco preguntas frecuentes sobre tiempos, inicio del proceso, revisiones, pagos y acompanamiento |
@@ -36,6 +36,7 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 - El navbar deja de comportarse como sticky en mobile; el estado `scrolled` queda reservado a desktop.
 - En dispositivos touch, los hover de cards se limitan a desktop y los botones responden con estados `:active`.
 - Las cards de video del caso de estudio se pueden abrir haciendo click en toda la card o con teclado (`Enter` / `Space`), con `role="button"` y `aria-label` dinamico.
+- El modal de video del caso soporta enlaces de TikTok, YouTube y videos nativos; usa embeds externos cuando corresponde y posters locales cuando se definen.
 - Los modales de servicios, portfolio y video integran historial del navegador en mobile: el gesto o boton de **back** cierra primero el popup abierto.
 - Los modales de servicios y portfolio fueron ajustados para mejorar legibilidad, scroll y espacio util en mobile.
 - La seccion de **FAQ** funciona como acordeon accesible: solo una respuesta queda abierta a la vez, con `aria-expanded` y `aria-hidden` sincronizados.
@@ -62,7 +63,7 @@ El sitio esta construido integramente con tecnologias web nativas, sin framework
 
 - **HTML5** para estructura semantica
 - **CSS3** para layout responsive, variables, animaciones, estados y theming
-- **JavaScript vanilla** para scroll reveal, menu mobile, modales, FAQ acordeon, WhatsApp contextual, tema claro/oscuro, boton mobile de volver arriba e integracion con History API en modales mobile
+- **JavaScript vanilla** para scroll reveal, menu mobile, modales, embeds de video externos, FAQ acordeon, WhatsApp contextual, tema claro/oscuro, boton mobile de volver arriba e integracion con History API en modales mobile
 - **Fuentes auto-hospedadas**: Playfair Display y Poppins servidas como `.woff2` desde `fonts/`, incluyendo Poppins Italic para enfasis editorial
 
 No requiere build. Se puede abrir `index.html` directamente en el navegador.
@@ -82,12 +83,10 @@ landing-vanilla/
 |   |-- favicon.png    - fallback PNG
 |   |-- apple-touch-icon.png - icono 180x180 para iOS y accesos guardados
 |   |-- og-cover.jpg   - imagen 1200x630 para Open Graph y Twitter Cards
-|   `-- combo.jpg      - portada real usada en el caso de estudio
+|   |-- antes-herradura.jpg   - poster del video original del caso de estudio
+|   |-- despues-herradura.jpg - poster del reel editado del caso de estudio
+|   `-- combo.jpg      - asset historico de portada del caso
 |-- fonts/             - Playfair Display y Poppins en `.woff2`, incluida Poppins Italic
-|-- video/             - assets puntuales de video
-|-- videos/
-|   `-- caso/
-|       `-- README.txt - nombres esperados para placeholders y clips del caso
 |-- robots.txt         - reglas de rastreo y referencia al sitemap
 |-- sitemap.xml        - sitemap publico de la landing
 |-- README.md
@@ -156,36 +155,48 @@ Cada item del portfolio usa `data-media` con un array JSON:
 ]
 ```
 
-### Actualizar videos del caso de estudio
+### Actualizar videos o embeds del caso de estudio
 
-Cada card comparativa usa `data-video-src` y, opcionalmente, `data-video-poster`. Las cards se inicializan como botones accesibles desde `main.js`, por lo que pueden abrir el modal con click, `Enter` o `Space`.
+Cada card comparativa usa `data-video-src` y, opcionalmente, `data-video-poster`. `main.js` detecta enlaces de TikTok, YouTube o archivos de video nativos:
+
+- TikTok: URL publica del video, convertida a `https://www.tiktok.com/player/v1/...`
+- YouTube: URL normal, `youtu.be`, Shorts o embed, convertida a `youtube-nocookie.com`
+- Video nativo: archivo `.mp4` u otro recurso reproducible por `<video>`
+
+Las cards se inicializan como botones accesibles desde `main.js`, por lo que pueden abrir el modal con click, `Enter` o `Space`.
 
 Ejemplo:
 
 ```html
 <div
   class="cv-card cv-card--after"
-  data-video-src="video/combo.mp4"
-  data-video-poster="img/combo.jpg">
+  data-video-src="https://www.tiktok.com/@muebleriabravovgg/video/7611299540032949524"
+  data-video-platform="tiktok"
+  data-video-poster="img/despues-herradura.jpg">
 </div>
 ```
 
-Si no se define `data-video-poster`, `main.js` genera una portada editorial automatica.
+Si no se define `data-video-poster`, `main.js` usa thumbnail de YouTube cuando corresponde o genera una portada editorial automatica.
 
 ### Actualizar metricas del caso de estudio
 
 Las metricas visibles del caso viven en `index.html`, dentro de `#caso`:
 
-- `.cs-post-summary` para las metricas de cada pieza antes/despues
+- `.cs-post-summary` para las metricas de cada pieza antes/despues: vistas, likes, guardados y compartidos
 - `.cs-result-band` para el resultado principal, actualmente `60x mas vistas`
 - `.cs-context-grid` para explicar punto de partida y trabajo realizado
 - `.cs-quote-block` para el cierre estrategico y CTA
 
 Si cambias el caso, actualiza tambien los tags del header (`.cs-tag`) y los textos del modal de video que se toman desde los contenidos visibles de cada card.
 
-### Actualizar precios
+### Actualizar Gestion de Redes y Tienda Online
 
-Los importes se editan en `index.html` dentro de `<span class="pricing-price">` en las secciones `#planes-contenido` y `#tienda-online`.
+Las secciones `#planes-contenido` y `#tienda-online` ya no muestran planes cerrados con precios fijos. Funcionan como bloques comerciales a medida:
+
+- `#planes-contenido` usa clases `.social-*` para Gestion de Redes, visual de dashboard, lista de entregables y CTA contextual.
+- `#tienda-online` usa clases `.shop-*` para Tienda Online, mockup de tienda, checklist de configuracion y CTA contextual.
+
+Para cambiar el alcance, edita los items de `.social-features-grid` o `.shop-features-grid`. Para cambiar la consulta de WhatsApp, actualiza el `href` y el `data-wa-msg` del CTA correspondiente.
 
 ### Editar preguntas frecuentes
 
