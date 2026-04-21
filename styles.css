@@ -4429,9 +4429,17 @@ html[data-theme="dark"] .social-feature-icon {
     position: relative;
     background: var(--reina-violet);
     color: var(--reina-ivory);
-    padding: 7rem 0;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: clamp(7rem, 12vh, 10rem) 0;
     overflow: hidden;
     text-align: center;
+}
+
+.finalcta-section .container-mid {
+    width: 100%;
 }
 
 .finalcta-deco-top {
@@ -4556,7 +4564,7 @@ html[data-theme="dark"] .social-feature-icon {
 
 @media (min-width: 768px) {
     .finalcta-section {
-        padding: 10rem 0;
+        padding: clamp(9rem, 14vh, 12rem) 0;
     }
 
     .finalcta-subtext {

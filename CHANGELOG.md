@@ -5,6 +5,21 @@ El formato esta basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0
 
 ---
 
+## [1.16.2] - 2026-04-21
+
+### Cambiado
+- La seccion **Sobre mi** ahora usa una bio personal mas extensa, con origen venezolano, vida en Rosario, primeros pasos en diseno y filosofia de trabajo
+- La disponibilidad se actualiza a **Agenda abierta 2026**
+- El CTA final pasa a un cierre mas directo: "¿Listos para arrancar?", con propuesta de conversacion de 15 minutos
+- El mensaje de WhatsApp del CTA final se ajusta para pedir una charla breve y definir por donde empezar
+- La seccion final ahora ocupa al menos el alto de la pantalla y centra su contenido verticalmente para funcionar como cierre de impacto
+
+### Eliminado
+- Se removio el tagline independiente "Donde la estetica se vuelve estrategia" de la seccion **Sobre mi**
+- Se simplificaron las lineas decorativas del eyebrow y la respuesta del CTA final a texto editorial directo
+
+---
+
 ## [1.16.1] - 2026-04-21
 
 ### Corregido

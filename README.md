@@ -20,9 +20,9 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 | **Tienda Online** | Servicio a medida para tienda en Tiendanube con diseno, productos, pagos, envios, dominio, correo y SEO basico |
 | **Caso de estudio** | Caso real con comparativa antes/despues para TikTok, metricas organicas, banda de resultado 60x y cards con embed externo |
 | **Portfolio** | Grilla asimetrica con modal por proyecto y media ampliada |
-| **Sobre mi** | Bio, filosofia de trabajo y disponibilidad |
+| **Sobre mi** | Bio personal ampliada, filosofia de trabajo, postura profesional y disponibilidad |
 | **FAQ** | Acordeon de cinco preguntas frecuentes sobre tiempos, inicio del proceso, revisiones, pagos y acompanamiento |
-| **Contacto (CTA)** | Bloque final de cierre con acceso directo a WhatsApp y email |
+| **Contacto (CTA)** | Bloque final full-height con invitacion a conversar 15 minutos por WhatsApp o email |
 | **Footer** | Navegacion secundaria, marca y datos de contacto |
 
 ---
@@ -198,6 +198,19 @@ Las secciones `#planes-contenido` y `#tienda-online` ya no muestran planes cerra
 - `#tienda-online` usa clases `.shop-*` para Tienda Online, mockup de tienda, checklist de configuracion y CTA contextual.
 
 Para cambiar el alcance, edita los items de `.social-features-grid` o `.shop-features-grid`. Para cambiar la consulta de WhatsApp, actualiza el `href` y el `data-wa-msg` del CTA correspondiente.
+
+### Editar Sobre mi y CTA final
+
+La bio vive en `#sobre-mi`, dentro de `.about-bio`. Actualmente funciona como una narracion personal ampliada: origen, llegada a Rosario, primeros pasos con herramientas de diseno, mirada critica sobre estrategia y forma de acompanamiento.
+
+El CTA final vive en `#contacto` y esta pensado como cierre directo:
+
+- Eyebrow: `— ULTIMO PASO —`
+- Headline: invitacion a arrancar
+- Subtexto: conversacion de 15 minutos
+- WhatsApp: mensaje prearmado para coordinar por donde empezar
+
+Si cambias el texto del CTA, actualiza tanto el `href` codificado de WhatsApp como `data-wa-msg`.
 
 ### Editar preguntas frecuentes
 
