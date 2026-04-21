@@ -33,6 +33,7 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 - El toggle de tema actualiza `data-theme`, sincroniza `aria-label` y `aria-pressed`, y evita flash inicial con un script en el `<head>`.
 - En mobile hay un boton flotante para **volver arriba** cuando el usuario ya hizo scroll.
 - El menu mobile usa apertura/cierre animado con CSS Grid, mantiene los links en Poppins y agrega feedback `:active`.
+- Los links internos calculan el offset del navbar y del menu mobile abierto antes de hacer scroll, para que las secciones no queden tapadas al navegar desde el menu.
 - El navbar deja de comportarse como sticky en mobile; el estado `scrolled` queda reservado a desktop.
 - En dispositivos touch, los hover de cards se limitan a desktop y los botones responden con estados `:active`.
 - Las cards de video del caso de estudio se pueden abrir haciendo click en toda la card o con teclado (`Enter` / `Space`), con `role="button"` y `aria-label` dinamico.

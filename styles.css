@@ -92,6 +92,12 @@ html {
     color-scheme: light;
 }
 
+@media (min-width: 768px) {
+    main > section[id] {
+        scroll-margin-top: 6rem;
+    }
+}
+
 html[data-theme="dark"] {
     color-scheme: dark;
 }

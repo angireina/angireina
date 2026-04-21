@@ -5,6 +5,15 @@ El formato esta basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0
 
 ---
 
+## [1.16.1] - 2026-04-21
+
+### Corregido
+- Los links internos ahora calculan el alto del navbar y del menu mobile abierto antes de hacer scroll, evitando que el destino quede tapado
+- El menu mobile se cierra de forma centralizada al navegar por anchors internos y sincroniza siempre `aria-expanded`
+- Las secciones con `id` tienen `scroll-margin-top` en desktop para mejorar el aterrizaje desde enlaces internos
+
+---
+
 ## [1.16.0] - 2026-04-21
 
 ### Anadido
