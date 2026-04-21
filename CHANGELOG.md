@@ -5,6 +5,28 @@ El formato esta basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0
 
 ---
 
+## [1.15.0] - 2026-04-20
+
+### Anadido
+- Fuente auto-hospedada `fonts/Poppins-Italic.woff2` y declaracion `@font-face` para usar Poppins en estilo italic
+- Banda de resultado en **Caso de estudio** con KPI principal `60x mas vistas` y aclaracion de resultado organico sin publicidad pagada
+- Resumenes de performance antes/despues para el caso de TikTok: vistas, likes y guardados visibles debajo de cada card
+- Badge de plataforma **TikTok** en la card de reel producido
+- Soporte para abrir cards de video del caso con click en toda la card o por teclado (`Enter` / `Space`), con `role="button"`, `tabindex` y `aria-label`
+
+### Cambiado
+- El caso **Muebleria Bravo** pasa a una narrativa mas especifica sobre el producto "Esquinero Julieta" y su transformacion en TikTok
+- La comparativa del caso se simplifica a una pieza antes y una pieza despues, con metricas editoriales mas directas
+- Se redisenaron los estilos del caso de estudio con layout responsive nuevo, cards mas compactas, banda violeta de resultado, citas con acentos y ajustes completos para modo oscuro
+- El menu mobile ahora se despliega con transicion basada en CSS Grid, usa Poppins en los links y agrega feedback tactil en `:active`
+- La generacion automatica de posters del caso diferencia mejor los estados antes/despues: patron neutro para material sin editar y gradiente editorial para reels producidos
+
+### Corregido
+- Las cards de video del caso ya no dependen solo del boton interno de play para abrir el modal
+- Se mejoro la accesibilidad de las cards de video del caso al hacerlas enfocables y activables por teclado
+
+---
+
 ## [1.14.0] - 2026-04-20
 
 ### Anadido

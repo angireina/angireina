@@ -18,7 +18,7 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 | **Servicios** | Seis cards de servicio con modal contextual, entregables, CTA, visual propio por servicio y contenido editable debajo de cada card |
 | **Planes - Contenido** | Tres planes mensuales para gestion de redes |
 | **Tienda Online - Planes** | Tres planes para armado de tienda en Tiendanube o Shopify |
-| **Caso de estudio** | Caso real con comparativa antes/despues, narrativa, resultados y cards de video |
+| **Caso de estudio** | Caso real con comparativa antes/despues para TikTok, metricas organicas, banda de resultado 60x y cards de video |
 | **Portfolio** | Grilla asimetrica con modal por proyecto y media ampliada |
 | **Sobre mi** | Bio, filosofia de trabajo y disponibilidad |
 | **FAQ** | Acordeon de cinco preguntas frecuentes sobre tiempos, inicio del proceso, revisiones, pagos y acompanamiento |
@@ -32,8 +32,10 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 - El sitio arranca en **modo claro por defecto**. Si existe una preferencia previa en `localStorage` (`reina-theme`), se respeta.
 - El toggle de tema actualiza `data-theme`, sincroniza `aria-label` y `aria-pressed`, y evita flash inicial con un script en el `<head>`.
 - En mobile hay un boton flotante para **volver arriba** cuando el usuario ya hizo scroll.
+- El menu mobile usa apertura/cierre animado con CSS Grid, mantiene los links en Poppins y agrega feedback `:active`.
 - El navbar deja de comportarse como sticky en mobile; el estado `scrolled` queda reservado a desktop.
 - En dispositivos touch, los hover de cards se limitan a desktop y los botones responden con estados `:active`.
+- Las cards de video del caso de estudio se pueden abrir haciendo click en toda la card o con teclado (`Enter` / `Space`), con `role="button"` y `aria-label` dinamico.
 - Los modales de servicios, portfolio y video integran historial del navegador en mobile: el gesto o boton de **back** cierra primero el popup abierto.
 - Los modales de servicios y portfolio fueron ajustados para mejorar legibilidad, scroll y espacio util en mobile.
 - La seccion de **FAQ** funciona como acordeon accesible: solo una respuesta queda abierta a la vez, con `aria-expanded` y `aria-hidden` sincronizados.
@@ -61,7 +63,7 @@ El sitio esta construido integramente con tecnologias web nativas, sin framework
 - **HTML5** para estructura semantica
 - **CSS3** para layout responsive, variables, animaciones, estados y theming
 - **JavaScript vanilla** para scroll reveal, menu mobile, modales, FAQ acordeon, WhatsApp contextual, tema claro/oscuro, boton mobile de volver arriba e integracion con History API en modales mobile
-- **Fuentes auto-hospedadas**: Playfair Display y Poppins servidas como `.woff2` desde `fonts/`
+- **Fuentes auto-hospedadas**: Playfair Display y Poppins servidas como `.woff2` desde `fonts/`, incluyendo Poppins Italic para enfasis editorial
 
 No requiere build. Se puede abrir `index.html` directamente en el navegador.
 
@@ -81,7 +83,7 @@ landing-vanilla/
 |   |-- apple-touch-icon.png - icono 180x180 para iOS y accesos guardados
 |   |-- og-cover.jpg   - imagen 1200x630 para Open Graph y Twitter Cards
 |   `-- combo.jpg      - portada real usada en el caso de estudio
-|-- fonts/             - Playfair Display y Poppins en `.woff2`
+|-- fonts/             - Playfair Display y Poppins en `.woff2`, incluida Poppins Italic
 |-- video/             - assets puntuales de video
 |-- videos/
 |   `-- caso/
@@ -156,7 +158,7 @@ Cada item del portfolio usa `data-media` con un array JSON:
 
 ### Actualizar videos del caso de estudio
 
-Cada card comparativa usa `data-video-src` y, opcionalmente, `data-video-poster`.
+Cada card comparativa usa `data-video-src` y, opcionalmente, `data-video-poster`. Las cards se inicializan como botones accesibles desde `main.js`, por lo que pueden abrir el modal con click, `Enter` o `Space`.
 
 Ejemplo:
 
@@ -169,6 +171,17 @@ Ejemplo:
 ```
 
 Si no se define `data-video-poster`, `main.js` genera una portada editorial automatica.
+
+### Actualizar metricas del caso de estudio
+
+Las metricas visibles del caso viven en `index.html`, dentro de `#caso`:
+
+- `.cs-post-summary` para las metricas de cada pieza antes/despues
+- `.cs-result-band` para el resultado principal, actualmente `60x mas vistas`
+- `.cs-context-grid` para explicar punto de partida y trabajo realizado
+- `.cs-quote-block` para el cierre estrategico y CTA
+
+Si cambias el caso, actualiza tambien los tags del header (`.cs-tag`) y los textos del modal de video que se toman desde los contenidos visibles de cada card.
 
 ### Actualizar precios
 

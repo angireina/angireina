@@ -468,17 +468,36 @@ const mobileModalHistory = (() => {
             card.querySelector('.cv-filemeta')?.textContent.trim() || '' :
             card.querySelector('.cv-reel-dur')?.textContent.trim() || '';
         const kicker = isBefore ? 'ANTES' : 'DESPUES';
-        const accent = isBefore ? '#7d7d8f' : '#cbd83b';
-        const bgStart = isBefore ? '#0d0d18' : '#6b4e2e';
-        const bgEnd = isBefore ? '#23233a' : '#c9ab86';
-        const body = isBefore ? 'Captura sin edicion' : 'Reel con direccion de arte';
+
+        if (isBefore) {
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1600" viewBox="0 0 900 1600">
+                    <defs>
+                        <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+                            <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.035)"/>
+                        </pattern>
+                        <radialGradient id="soft" cx="72%" cy="22%" r="34%">
+                            <stop offset="0%" stop-color="rgba(255,255,255,0.14)"/>
+                            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                        </radialGradient>
+                    </defs>
+                    <rect width="900" height="1600" fill="#0d0d18"/>
+                    <rect width="900" height="1600" fill="url(#dots)"/>
+                    <rect width="900" height="1600" fill="url(#soft)"/>
+                    <circle cx="704" cy="214" r="74" fill="rgba(255,255,255,0.06)"/>
+                    <circle cx="450" cy="800" r="92" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
+                </svg>
+            `;
+
+            return encodeSvg(svg);
+        }
 
         const svg = `
             <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1600" viewBox="0 0 900 1600">
                 <defs>
                     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-                        <stop offset="0%" stop-color="${bgStart}"/>
-                        <stop offset="100%" stop-color="${bgEnd}"/>
+                        <stop offset="0%" stop-color="#6b4e2e"/>
+                        <stop offset="100%" stop-color="#c9ab86"/>
                     </linearGradient>
                     <radialGradient id="glow" cx="75%" cy="22%" r="40%">
                         <stop offset="0%" stop-color="rgba(255,255,255,0.85)"/>
@@ -486,13 +505,13 @@ const mobileModalHistory = (() => {
                     </radialGradient>
                 </defs>
                 <rect width="900" height="1600" fill="url(#bg)"/>
-                <rect width="900" height="1600" fill="url(#glow)" opacity="${isBefore ? '0.18' : '0.3'}"/>
-                <circle cx="720" cy="220" r="110" fill="${accent}" opacity="${isBefore ? '0.16' : '0.28'}"/>
+                <rect width="900" height="1600" fill="url(#glow)" opacity="0.3"/>
+                <circle cx="720" cy="220" r="110" fill="#cbd83b" opacity="0.28"/>
                 <rect x="66" y="82" width="190" height="42" rx="21" fill="rgba(255,255,255,0.12)"/>
                 <text x="96" y="110" fill="rgba(255,255,255,0.76)" font-size="22" font-family="Poppins, Arial, sans-serif" letter-spacing="5">${escapeSvgText(kicker)}</text>
                 <text x="66" y="1240" fill="#fffeec" font-size="74" font-family="Playfair Display, Georgia, serif">${escapeSvgText(title)}</text>
                 <text x="66" y="1304" fill="rgba(255,255,255,0.7)" font-size="28" font-family="Poppins, Arial, sans-serif" letter-spacing="3">${escapeSvgText(detail)}</text>
-                <text x="66" y="1380" fill="rgba(255,255,255,0.58)" font-size="24" font-family="Poppins, Arial, sans-serif">${escapeSvgText(body)}</text>
+                <text x="66" y="1380" fill="rgba(255,255,255,0.58)" font-size="24" font-family="Poppins, Arial, sans-serif">Reel con direccion de arte</text>
                 <circle cx="450" cy="760" r="82" fill="rgba(255,255,255,0.9)"/>
                 <polygon points="430,720 510,760 430,800" fill="#1a1a2e"/>
             </svg>
@@ -568,6 +587,21 @@ const mobileModalHistory = (() => {
         cover.className = 'cv-cover';
         cover.style.backgroundImage = `url("${getPoster(card)}")`;
         card.insertBefore(cover, card.firstChild);
+
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Abrir video: ${getTitle(card)}`);
+
+        card.addEventListener('click', () => {
+            openModal(card, card);
+        });
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(card, card);
+            }
+        });
 
         button.setAttribute('aria-label', 'Abrir video');
         button.addEventListener('click', (e) => {

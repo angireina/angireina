@@ -35,6 +35,14 @@
 
 @font-face {
     font-family: "Poppins";
+    src: url("fonts/Poppins-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
     src: url("fonts/Poppins-Medium.woff2") format("woff2");
     font-weight: 500;
     font-style: normal;
@@ -691,27 +699,53 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
 
 /* Mobile menu */
 .mobile-menu {
-    display: none;
+    display: grid;
+    grid-template-rows: 0fr;
     background: var(--reina-ivory);
     border-top: 1px solid rgba(26, 26, 46, 0.1);
-    padding: 1.5rem;
+    padding: 0 1.5rem;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-0.75rem);
+    transition:
+        grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 260ms ease,
+        transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        padding 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .mobile-menu.open {
-    display: block;
+    grid-template-rows: 1fr;
+    padding: 1.35rem 1.5rem 1.6rem;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 .mobile-menu ul {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.05rem;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .mobile-nav-link {
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: 1.5rem;
-    color: var(--reina-dark);
+    display: inline-flex;
+    width: fit-content;
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: rgba(26, 26, 46, 0.8);
     text-decoration: none;
+    transition: color 260ms ease, transform 260ms ease;
+}
+
+.mobile-nav-link:active {
+    color: var(--reina-violet);
+    transform: translateX(0.15rem);
 }
 
 .mobile-scroll-top {
@@ -1965,6 +1999,14 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cs-stats-note {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(26, 26, 46, 0.3);
     margin-bottom: 4rem;
 }
 
@@ -1976,6 +2018,7 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
     flex-direction: column;
     position: relative;
     min-height: 11rem;
+    border-top: 3px solid var(--reina-pear);
 }
 
 .cs-ctx-counter {
@@ -2077,6 +2120,23 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    position: relative;
+    padding-top: 2rem;
+}
+
+.cs-quote-content::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.75rem;
+    left: -0.25rem;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(6rem, 10vw, 8rem);
+    line-height: 1;
+    color: var(--reina-violet);
+    opacity: 0.12;
+    pointer-events: none;
+    user-select: none;
+    font-style: italic;
 }
 
 .cs-quote-text {
@@ -2088,30 +2148,49 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
 }
 
 .cs-quote-cite {
-    font-size: 0.6875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: rgba(26, 26, 46, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
     font-style: normal;
+}
+
+.cs-quote-author {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--reina-dark);
+    letter-spacing: 0.01em;
+}
+
+.cs-quote-context {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: rgba(26, 26, 46, 0.4);
 }
 
 .cs-quote-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: var(--reina-violet);
+    color: #ffffff;
     font-size: 0.875rem;
-    color: var(--reina-dark);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-color: rgba(26, 26, 46, 0.25);
-    transition: color 200ms ease, text-decoration-color 200ms ease;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
     align-self: flex-start;
+    flex-shrink: 0;
     cursor: pointer;
+    transition: background 280ms ease, transform 280ms ease, box-shadow 280ms ease;
 }
 
 .cs-quote-cta:hover {
-    color: var(--reina-violet);
-    text-decoration-color: var(--reina-violet);
+    background: var(--reina-violet-dark);
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -16px rgba(143, 111, 224, 0.75);
 }
 
 @media (min-width: 768px) {
@@ -2133,7 +2212,8 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
 
     .cv-divider {
         transform: none;
-        padding-top: 35%;
+        align-self: center;
+        padding-top: 2.25rem;
         flex-shrink: 0;
     }
 
@@ -2147,13 +2227,9 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
 
     .cs-quote-block {
         flex-direction: row;
-        align-items: flex-end;
+        align-items: center;
         justify-content: space-between;
         gap: 3rem;
-    }
-
-    .cs-quote-cta {
-        flex-shrink: 0;
     }
 }
 
@@ -2164,6 +2240,545 @@ html[data-theme="dark"] .theme-toggle-icon--sun {
 
     .casestudy-header {
         margin-bottom: 5rem;
+    }
+}
+
+/* Screenshot reference layout for current case study */
+.casestudy-section {
+    padding: 5.5rem 0 6.5rem;
+}
+
+.casestudy-header {
+    align-items: end;
+    gap: 2.5rem;
+    margin-bottom: clamp(3.25rem, 6vw, 4.4rem);
+}
+
+.casestudy-eyebrow {
+    margin-bottom: 2rem;
+}
+
+.casestudy-heading {
+    font-size: clamp(3.2rem, 6.6vw, 5.4rem);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    margin-bottom: 1.65rem;
+}
+
+.casestudy-subtitle {
+    max-width: 45rem;
+    font-size: clamp(0.98rem, 1.45vw, 1.12rem);
+    line-height: 1.75;
+}
+
+.casestudy-subtitle em {
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-style: italic;
+    color: var(--reina-dark);
+}
+
+.casestudy-tags {
+    align-content: flex-end;
+    justify-content: flex-start;
+    padding-top: 0;
+}
+
+.cs-tag {
+    font-size: 0.625rem;
+    line-height: 1;
+    letter-spacing: 0.26em;
+    padding: 0.65rem 1rem;
+    background: rgba(255, 254, 236, 0.42);
+}
+
+.cs-tag--year {
+    background: var(--reina-eggplant);
+    border-color: var(--reina-eggplant);
+    color: var(--reina-ivory);
+}
+
+.casestudy-comparison {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 44rem;
+    margin: 0 auto clamp(3.75rem, 6vw, 4.75rem);
+}
+
+.cv-side {
+    min-width: 0;
+    gap: 0;
+}
+
+.cv-side-header {
+    gap: 0.9rem;
+    min-height: 2.25rem;
+    margin-bottom: 1.05rem;
+}
+
+.cv-badge {
+    font-size: 0.625rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.28em;
+    padding: 0.68rem 1rem;
+}
+
+.cv-badge--before {
+    background: rgba(26, 26, 46, 0.06);
+    color: rgba(26, 26, 46, 0.45);
+}
+
+.cv-badge--after {
+    background: var(--reina-violet);
+    color: var(--reina-ivory);
+}
+
+.cv-side-desc {
+    white-space: nowrap;
+}
+
+.cv-videos {
+    display: block;
+}
+
+.cv-card {
+    border-radius: 13px;
+    box-shadow: 0 1.25rem 3rem -2.5rem rgba(26, 26, 46, 0.45);
+}
+
+.cv-card:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 1.5rem 3rem -2rem rgba(26, 26, 46, 0.42);
+}
+
+.cv-card--after .cv-cover {
+    background-position: center top;
+}
+
+.cv-card::after {
+    background: linear-gradient(180deg, rgba(8, 8, 14, 0.08) 0%, rgba(8, 8, 14, 0.02) 42%, rgba(8, 8, 14, 0.66) 100%);
+}
+
+.cv-card-top-meta {
+    top: 0.95rem;
+    left: 1rem;
+    right: 1rem;
+}
+
+.cv-rec {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.cv-play {
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid rgba(255, 254, 236, 0.55);
+    color: rgba(26, 26, 46, 0.72);
+}
+
+.cv-card--after .cv-play {
+    background: rgba(255, 254, 236, 0.96);
+    border-color: rgba(255, 254, 236, 0.9);
+    color: var(--reina-violet);
+}
+
+.cv-card-footer {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    gap: 0.25rem;
+}
+
+.cv-filename {
+    font-size: 0.625rem;
+    color: rgba(255, 255, 255, 0.74);
+}
+
+.cv-filemeta {
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.46);
+    letter-spacing: 0.18em;
+}
+
+.cv-card-brand-badge {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 2px;
+    background: var(--reina-violet);
+    color: var(--reina-ivory);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+}
+
+.cv-card-platform-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.55rem;
+    border-radius: 2px;
+    background: rgba(26, 26, 46, 0.58);
+    color: rgba(255, 254, 236, 0.88);
+    font-size: 0.55rem;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.cv-brand-dot {
+    width: 0.34rem;
+    height: 0.34rem;
+}
+
+.cv-reel-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.cv-reel-dur {
+    font-size: 0.58rem;
+}
+
+.cs-post-summary {
+    margin-top: 1.45rem;
+}
+
+.cs-post-title {
+    font-size: clamp(1.35rem, 2vw, 1.65rem);
+    line-height: 1.2;
+    color: var(--reina-dark);
+    margin-bottom: 0.6rem;
+}
+
+.cs-post-type {
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    color: rgba(26, 26, 46, 0.38);
+    margin-bottom: 1.1rem;
+}
+
+.cs-post-summary--after .cs-post-type {
+    color: var(--reina-violet);
+}
+
+.cs-post-stats {
+    border-top: 1px solid rgba(26, 26, 46, 0.12);
+    padding-top: 1.15rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.1rem;
+}
+
+.cs-post-summary--after .cs-post-stats {
+    flex-wrap: nowrap;
+    gap: 1.1rem;
+}
+
+.cs-post-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(26, 26, 46, 0.62);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+}
+
+.cs-post-summary--after .cs-post-stat {
+    color: rgba(109, 77, 188, 0.88);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.cs-post-stat strong {
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--reina-dark);
+    font-weight: 600;
+    text-transform: none;
+}
+
+.cs-post-summary--after .cs-post-stat strong {
+    color: var(--reina-violet-dark);
+    font-size: 1.12rem;
+}
+
+.cv-divider {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0;
+    background: transparent;
+    color: var(--reina-violet);
+    box-shadow: none;
+    justify-self: center;
+}
+
+.cv-divider svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.cs-result-band {
+    min-height: clamp(22rem, 28vw, 26rem);
+    padding: clamp(3.5rem, 6vw, 5.5rem) clamp(2rem, 5vw, 4.5rem) clamp(3.4rem, 5vw, 4.6rem);
+    background: linear-gradient(135deg, #a88bff 0%, #9f78ff 62%, #8767dd 100%);
+    color: var(--reina-ivory);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: clamp(5.5rem, 9vw, 7rem);
+}
+
+.cs-result-kpi {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 4vw, 2.25rem);
+    flex-wrap: wrap;
+}
+
+.cs-result-number {
+    min-width: clamp(18rem, 30vw, 26rem);
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: clamp(6.4rem, 13vw, 12.8rem);
+    font-weight: 700;
+    line-height: 0.86;
+    color: var(--reina-ivory);
+    letter-spacing: 0;
+}
+
+.cs-result-divider {
+    width: 1px;
+    height: 3.7rem;
+    background: rgba(255, 254, 236, 0.36);
+}
+
+.cs-result-label {
+    display: block;
+    font-size: clamp(1.65rem, 3vw, 2.35rem);
+    line-height: 1;
+    font-style: italic;
+    color: var(--reina-ivory);
+}
+
+.cs-result-sub {
+    flex-basis: 100%;
+    margin-left: clamp(27rem, 35vw, 34rem);
+    margin-top: -2.65rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: rgba(255, 254, 236, 0.78);
+}
+
+.cs-result-copy {
+    max-width: 63rem;
+    font-size: clamp(1.55rem, 3vw, 2.35rem);
+    line-height: 1.22;
+    color: var(--reina-ivory);
+    letter-spacing: -0.03em;
+}
+
+.cs-result-copy em {
+    font-style: italic;
+}
+
+.casestudy-context {
+    border-top: 0;
+    padding-top: 0;
+}
+
+.cs-context-grid {
+    gap: clamp(3rem, 7vw, 6rem);
+    margin-bottom: clamp(4rem, 7vw, 5.5rem);
+}
+
+.cs-context-label {
+    letter-spacing: 0.36em;
+    margin-bottom: 1.3rem;
+}
+
+.cs-context-heading {
+    font-size: clamp(1.8rem, 3.2vw, 2.35rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    margin-bottom: 1.55rem;
+}
+
+.cs-context-body,
+.cs-transform-list li {
+    line-height: 1.78;
+}
+
+.cs-transform-list li {
+    padding-left: 1.95rem;
+}
+
+.cs-quote-block {
+    padding-top: clamp(2.75rem, 5vw, 4rem);
+    gap: 2.25rem;
+}
+
+.cs-quote-content {
+    gap: 1.25rem;
+    padding-top: 0;
+}
+
+.cs-quote-content::before {
+    content: none;
+}
+
+.cs-quote-text {
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    max-width: 55rem;
+    font-size: clamp(1.55rem, 3.2vw, 2.35rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+    font-style: normal;
+}
+
+.cs-quote-accent {
+    color: var(--reina-violet-dark);
+    font-weight: 600;
+}
+
+.cs-quote-cta {
+    min-height: 3rem;
+    padding: 0.85rem 1.55rem;
+}
+
+@media (min-width: 768px) {
+    .casestudy-section {
+        padding: 7rem 0 7.5rem;
+    }
+
+    .casestudy-header {
+        grid-template-columns: minmax(0, 1fr) minmax(22rem, 31rem);
+        gap: 3rem;
+    }
+
+    .casestudy-tags {
+        justify-content: flex-end;
+        padding-bottom: 0.6rem;
+    }
+
+    .casestudy-comparison {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(3rem, 5vw, 4.5rem);
+        max-width: 49rem;
+    }
+
+    .cv-divider {
+        position: absolute;
+        left: 50%;
+        top: 21rem;
+        z-index: 4;
+        transform: none;
+        translate: -50% -50%;
+        flex-shrink: 0;
+    }
+
+    .cs-context-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cs-quote-block {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3rem;
+    }
+
+    .cs-quote-cta {
+        align-self: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .cv-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 1.5rem 3rem -2rem rgba(26, 26, 46, 0.42);
+    }
+
+    .casestudy-header {
+        margin-bottom: 4.25rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .casestudy-section {
+        padding-top: 5rem;
+    }
+
+    .casestudy-tags {
+        max-width: 22rem;
+    }
+
+    .cs-tag {
+        font-size: 0.55rem;
+        padding: 0.62rem 0.85rem;
+    }
+
+    .cv-side-header {
+        gap: 0.7rem;
+    }
+
+    .cv-side-desc {
+        white-space: normal;
+    }
+
+    .cv-play {
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+
+    .cs-result-band {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+    }
+
+    .cs-result-kpi {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .cs-result-number {
+        min-width: 0;
+    }
+
+    .cs-result-divider {
+        width: 4rem;
+        height: 1px;
+    }
+
+    .cs-result-sub {
+        margin: 0;
+        line-height: 1.7;
+    }
+
+    .cs-post-summary--after .cs-post-stats {
+        flex-wrap: wrap;
+        gap: 0.8rem 1rem;
+    }
+
+    .cs-quote-cta {
+        width: 100%;
     }
 }
 
@@ -3915,8 +4530,12 @@ html[data-theme="dark"] .pricing-plan-name,
 html[data-theme="dark"] .pricing-price,
 html[data-theme="dark"] .pricing-cta-text,
 html[data-theme="dark"] .casestudy-heading,
+html[data-theme="dark"] .casestudy-subtitle em,
+html[data-theme="dark"] .cs-post-title,
+html[data-theme="dark"] .cs-post-stat strong,
 html[data-theme="dark"] .cs-context-heading,
 html[data-theme="dark"] .cs-quote-text,
+html[data-theme="dark"] .cs-quote-author,
 html[data-theme="dark"] .about-heading,
 html[data-theme="dark"] .about-tagline,
 html[data-theme="dark"] .faq-heading,
@@ -3945,6 +4564,7 @@ html[data-theme="dark"] .casestudy-eyebrow,
 html[data-theme="dark"] .casestudy-subtitle,
 html[data-theme="dark"] .cs-tag:not(.cs-tag--year),
 html[data-theme="dark"] .cv-side-desc,
+html[data-theme="dark"] .cs-post-stat,
 html[data-theme="dark"] .cv-caption,
 html[data-theme="dark"] .cs-context-body,
 html[data-theme="dark"] .cs-transform-list li,
@@ -3966,7 +4586,8 @@ html[data-theme="dark"] .service-arrow,
 html[data-theme="dark"] .pricing-plan-num,
 html[data-theme="dark"] .cs-counter,
 html[data-theme="dark"] .cv-divider,
-html[data-theme="dark"] .cs-quote-cite,
+html[data-theme="dark"] .cs-post-type,
+html[data-theme="dark"] .cs-quote-context,
 html[data-theme="dark"] .year-card-label,
 html[data-theme="dark"] .pmodal-number,
 html[data-theme="dark"] .pmodal-year,
@@ -4028,6 +4649,7 @@ html[data-theme="dark"] .pricing-divider {
 
 html[data-theme="dark"] .pricing-cta-row,
 html[data-theme="dark"] .casestudy-context,
+html[data-theme="dark"] .cs-post-stats,
 html[data-theme="dark"] .cs-quote-block,
 html[data-theme="dark"] .pmodal-tags {
     border-top-color: var(--theme-border);
@@ -4053,14 +4675,77 @@ html[data-theme="dark"] .faq-item.is-open .faq-toggle-icon {
     color: var(--reina-ivory);
 }
 
-html[data-theme="dark"] .cs-quote-cta {
+html[data-theme="dark"] .cs-quote-author {
     color: var(--theme-text);
-    text-decoration-color: rgba(255, 254, 236, 0.28);
 }
 
-html[data-theme="dark"] .cs-quote-cta:hover {
+html[data-theme="dark"] .cs-stats-note {
+    color: rgba(255, 254, 236, 0.22);
+}
+
+html[data-theme="dark"] .cv-badge--before {
+    background: rgba(255, 254, 236, 0.12);
+    color: rgba(255, 254, 236, 0.78);
+}
+
+html[data-theme="dark"] .cv-side-desc {
+    color: rgba(255, 254, 236, 0.92);
+    font-weight: 600;
+}
+
+html[data-theme="dark"] .cv-card--before {
+    background: #080816;
+    box-shadow: 0 1.5rem 3rem -2rem rgba(0, 0, 0, 0.78);
+}
+
+html[data-theme="dark"] .cv-card--after {
+    box-shadow: 0 1.5rem 3rem -2rem rgba(0, 0, 0, 0.62);
+}
+
+html[data-theme="dark"] .cv-card::after {
+    background: linear-gradient(180deg, rgba(4, 4, 12, 0.02) 0%, rgba(4, 4, 12, 0.08) 42%, rgba(4, 4, 12, 0.64) 100%);
+}
+
+html[data-theme="dark"] .cv-rec,
+html[data-theme="dark"] .cv-filename,
+html[data-theme="dark"] .cv-filemeta,
+html[data-theme="dark"] .cv-reel-title,
+html[data-theme="dark"] .cv-reel-dur {
+    color: rgba(255, 254, 236, 0.9);
+}
+
+html[data-theme="dark"] .cs-post-type {
+    color: rgba(255, 254, 236, 0.64);
+}
+
+html[data-theme="dark"] .cs-post-summary--after .cs-post-type,
+html[data-theme="dark"] .cs-post-summary--after .cs-post-stat,
+html[data-theme="dark"] .cs-post-summary--after .cs-post-stat strong {
+    color: #d8c9ff;
+}
+
+html[data-theme="dark"] .cs-post-summary--after .cs-post-stat strong {
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .cs-post-stat {
+    color: rgba(255, 254, 236, 0.86);
+}
+
+html[data-theme="dark"] .cs-post-stat strong {
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .cv-divider {
+    color: rgba(255, 254, 236, 0.74);
+}
+
+html[data-theme="dark"] .cs-result-band {
+    background: linear-gradient(135deg, #8f6bf2 0%, #7d59df 58%, #5f3ab5 100%);
+}
+
+html[data-theme="dark"] .cs-quote-accent {
     color: var(--reina-violet);
-    text-decoration-color: var(--reina-violet);
 }
 
 html[data-theme="dark"] .finalcta-section {
