@@ -33,8 +33,13 @@
    ============================================= */
 (function() {
     const THEME_KEY = 'reina-theme';
+    const THEME_COLORS = {
+        light: '#fffeec',
+        dark: '#0e0a1f'
+    };
     const root = document.documentElement;
     const toggle = document.getElementById('themeToggle');
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
     if (!toggle) return;
 
@@ -49,6 +54,9 @@
 
     const applyTheme = (theme) => {
         root.dataset.theme = theme;
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute('content', THEME_COLORS[theme]);
+        }
         syncToggle(theme);
     };
 

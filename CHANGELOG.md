@@ -5,6 +5,19 @@ El formato esta basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0
 
 ---
 
+## [1.16.3] - 2026-04-21
+
+### Anadido
+- Meta `theme-color` inicial para modo claro, con valores definidos para modo claro y modo oscuro
+- Script de Microsoft Clarity con el tag `wf8t3wlne2` para analitica de comportamiento
+
+### Cambiado
+- El script anti-flash del `<head>` ahora tambien actualiza `theme-color` segun el tema guardado en `localStorage`
+- El toggle de tema sincroniza el color de la interfaz del navegador al cambiar entre modo claro y oscuro
+- El fondo base de `html` acompana el tema activo y transiciona el cambio de color para evitar flashes visuales
+
+---
+
 ## [1.16.2] - 2026-04-21
 
 ### Cambiado

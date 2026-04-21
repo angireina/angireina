@@ -5,16 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fffeec">
     <script>
         (function() {
+            var themeColors = {
+                light: '#fffeec',
+                dark: '#0e0a1f'
+            };
+
             try {
                 var storedTheme = localStorage.getItem('reina-theme');
                 var theme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : 'light';
                 document.documentElement.setAttribute('data-theme', theme);
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColors[theme]);
             } catch (error) {
                 document.documentElement.setAttribute('data-theme', 'light');
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColors.light);
             }
         })();
+    </script>
+
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wf8t3wlne2");
     </script>
     <!-- === SEO BÁSICO === -->
     <title>REINA by Angi · Diseño gráfico y estrategia de marca en Rosario</title>
@@ -22,7 +38,6 @@
     <meta name="keywords" content="diseño gráfico Rosario, community manager Rosario, identidad visual, branding PyMEs, diseño de marca Argentina, gestión de redes sociales, estrategia de contenido, reels para negocios">
     <meta name="author" content="Angi Reina">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#1A1A2E">
     <link rel="canonical" href="https://angireina.com/">
 
     <!-- === OPEN GRAPH (Facebook, WhatsApp, LinkedIn) === -->

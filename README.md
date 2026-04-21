@@ -30,7 +30,8 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 ## Interacciones y UX
 
 - El sitio arranca en **modo claro por defecto**. Si existe una preferencia previa en `localStorage` (`reina-theme`), se respeta.
-- El toggle de tema actualiza `data-theme`, sincroniza `aria-label` y `aria-pressed`, y evita flash inicial con un script en el `<head>`.
+- El toggle de tema actualiza `data-theme`, sincroniza `aria-label`, `aria-pressed` y `theme-color`, y evita flash inicial con un script en el `<head>`.
+- El color base del documento (`html`) acompana el tema activo para que el fondo del navegador y los cambios de tema no muestren saltos visuales.
 - En mobile hay un boton flotante para **volver arriba** cuando el usuario ya hizo scroll.
 - El menu mobile usa apertura/cierre animado con CSS Grid, mantiene los links en Poppins y agrega feedback `:active`.
 - Los links internos calculan el offset del navbar y del menu mobile abierto antes de hacer scroll, para que las secciones no queden tapadas al navegar desde el menu.
@@ -49,23 +50,25 @@ La pagina funciona como herramienta de presentacion y captacion para la marca pe
 
 El proyecto incluye configuracion base para indexacion, previews sociales y conversion:
 
-- **SEO basico en `<head>`**: `title`, `description`, `keywords`, `author`, `robots`, `theme-color` y `canonical` apuntando a `https://angireina.com/`.
+- **SEO basico en `<head>`**: `title`, `description`, `keywords`, `author`, `robots`, `theme-color` dinamico y `canonical` apuntando a `https://angireina.com/`.
 - **Open Graph y Twitter Cards**: tags para Facebook, WhatsApp, LinkedIn y X, usando `img/og-cover.jpg` como imagen social principal.
 - **Schema.org**: datos estructurados `ProfessionalService` para la marca/servicios y `FAQPage` para las preguntas frecuentes.
 - **Crawling**: `robots.txt` permite el rastreo y referencia `sitemap.xml`; el sitemap declara la home canonica con `lastmod`, `changefreq` y `priority`.
 - **Performance SEO**: preconnect a hosts de imagenes, preload de la imagen hero con `fetchpriority="high"`, `width`/`height` en imagenes clave y `loading="lazy"` en media no critica.
 - **SEM / conversion**: los enlaces de WhatsApp tienen mensajes codificados en el `href` como fallback sin JS, utiles para trafico de anuncios, previews y navegadores con scripts limitados.
+- **Analitica**: integracion con Microsoft Clarity para registrar comportamiento agregado de usuarios, mapas de calor y sesiones.
 
 ---
 
 ## Tecnologias
 
-El sitio esta construido integramente con tecnologias web nativas, sin frameworks ni dependencias externas:
+El sitio esta construido integramente con tecnologias web nativas, sin frameworks ni dependencias de build:
 
 - **HTML5** para estructura semantica
 - **CSS3** para layout responsive, variables, animaciones, estados y theming
 - **JavaScript vanilla** para scroll reveal, menu mobile, modales, embeds de video externos, FAQ acordeon, WhatsApp contextual, tema claro/oscuro, boton mobile de volver arriba e integracion con History API en modales mobile
 - **Fuentes auto-hospedadas**: Playfair Display y Poppins servidas como `.woff2` desde `fonts/`, incluyendo Poppins Italic para enfasis editorial
+- **Microsoft Clarity** como script externo de analitica de comportamiento
 
 No requiere build. Se puede abrir `index.html` directamente en el navegador.
 
@@ -230,7 +233,8 @@ Los metadatos principales viven en el `<head>` de `index.html`.
 
 Revisa estos bloques cuando cambie el dominio, la propuesta comercial o la imagen social:
 
-- `SEO BASICO`: titulo, descripcion, keywords, robots, theme-color y canonical
+- `SEO BASICO`: titulo, descripcion, keywords, robots, theme-color dinamico y canonical
+- `ANALITICA`: script de Microsoft Clarity y su identificador de proyecto
 - `OPEN GRAPH`: `og:title`, `og:description`, `og:url`, `og:image`, dimensiones y alt
 - `TWITTER / X`: card, titulo, descripcion e imagen
 - `SCHEMA.ORG: ProfessionalService`: datos de marca, contacto, ubicacion y catalogo de servicios
